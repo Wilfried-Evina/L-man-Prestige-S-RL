@@ -1,28 +1,32 @@
 {
-  "welcome": "Bienvenue",
-  "hello": "Bonjour",
-  "language": "Langue",
-  "french": "Français",
-  "english": "Anglais",
-  "spanish": "Espagnol",
-  "hero.title": "Immobilier de Prestige",
-  "hero.cta": "Découvrir nos services",
-  "footer.services": "Services",
-  "footer.about": "À propos",
-  "footer.legal": "Légal",
-  "footer.contact": "Contact",
-  "footer.email": "Email",
-  "footer.phone": "Téléphone",
-  "footer.address": "Adresse",
-  "footer.followUs": "Nous suivre",
-  "footer.copyright": "© 2026 Léman Prestige S.R.L. Tous droits réservés.",
-  "footer.sales": "Vente",
-  "footer.rental": "Location",
-  "footer.management": "Gestion",
-  "footer.ourStory": "Notre histoire",
-  "footer.team": "Équipe",
-  "footer.careers": "Carrière",
-  "footer.terms": "Conditions",
-  "footer.privacy": "Confidentialité",
-  "footer.legalNotice": "Mentions légales"
+    "header": {
+        "properties": "Propriétés",
+        "services": "Services",
+        "about": "À propos",
+        "contact": "Contact"
+    },
+    "hero": {
+        "title": "Léman Property Prestige",
+        "cta": "Découvrir nos biens"
+    },
+    "footer": {
+        "services": "Services",
+        "sales": "Vente",
+        "rental": "Location",
+        "management": "Gestion",
+        "about": "À propos",
+        "ourStory": "Notre histoire",
+        "team": "Équipe",
+        "careers": "Carrières",
+        "legal": "Légal",
+        "terms": "Conditions",
+        "privacy": "Confidentialité",
+        "legalNotice": "Mentions légales",
+        "contact": "Contact",
+        "email": "Email",
+        "phone": "Téléphone",
+        "address": "Adresse",
+        "followUs": "Suivez-nous",
+        "copyright": "© {year} Léman Property Prestige. Tous droits réservés."
+    }
 }
