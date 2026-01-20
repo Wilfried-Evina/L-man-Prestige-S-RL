@@ -5,6 +5,17 @@
         "about": "Acerca de",
         "contact": "Contacto"
     },
+    "properties": {
+        "title": "Nuestra colección",
+        "subtitle": "El arte de vivir de forma excepcional: una colección privada de residencias exclusivas en el corazón del Lago Lemán.",
+        "sale": "Venta",
+        "rent": "Alquiler",
+        "sqm": "m²",
+        "rooms": "Habitaciones",
+        "baths": "Baños",
+        "viewDetails": "Explorar Propiedad",
+        "featured": "Propiedad Destacada"
+    },
     "hero": {
         "title": "Léman Property Prestige",
         "cta": "Ver propiedades"

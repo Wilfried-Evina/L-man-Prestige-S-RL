@@ -5,6 +5,17 @@
         "about": "About",
         "contact": "Contact"
     },
+    "properties": {
+        "title": "Our Collection",
+        "subtitle": "The art of exceptional living: a private collection of rare residences in the heart of the Lake Geneva basin.",
+        "sale": "For Sale",
+        "rent": "For Rent",
+        "sqm": "sqm",
+        "rooms": "Rooms",
+        "baths": "Baths",
+        "viewDetails": "Explore Property",
+        "featured": "Featured Property"
+    },
     "hero": {
         "title": "Léman Property Prestige",
         "cta": "Browse our listings"

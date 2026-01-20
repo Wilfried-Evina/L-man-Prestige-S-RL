@@ -5,6 +5,17 @@
         "about": "À propos",
         "contact": "Contact"
     },
+    "properties": {
+        "title": "Notre collection",
+        "subtitle": "L'art de vivre d'exception : une collection privée de résidences rares au cœur du bassin lémanique.",
+        "sale": "Vente",
+        "rent": "Location",
+        "sqm": "m²",
+        "rooms": "Pièces",
+        "baths": "Salles d'eau",
+        "viewDetails": "Explorer le bien",
+        "featured": "Propriété Vedette"
+    },
     "hero": {
         "title": "Léman Property Prestige",
         "cta": "Découvrir nos biens"
