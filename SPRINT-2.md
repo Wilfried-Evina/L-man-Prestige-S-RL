@@ -37,6 +37,12 @@ Mise en place du cœur de métier : la galerie des biens immobiliers, la présen
 - [ ] Intégrer WhatsApp et créer la page de Contact.
 - [ ] Finaliser la présentation des Tarifs (Page dédiée).
 
+### Tâche 7 : Page de Détail d'un Bien
+- [ ] Créer la page dynamique `/[locale]/properties/[id]`.
+- [ ] Implémenter une galerie d'images avec Slider (Embla o Swiper).
+- [ ] Affichage complet : Description narrative, équipements, carte.
+- [ ] Bouton d'action direct : "Demander une visite privée".
+
 ## 🏗️ Architecture & Best Practices
 - **Vitesse** : Priorité au fonctionnel sans sacrifier l'esthétique Luxury.
 - **Réutilisabilité** : Utilisation maximale des atomes créés au Sprint 1.
