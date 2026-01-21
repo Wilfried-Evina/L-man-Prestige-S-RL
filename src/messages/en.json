@@ -15,8 +15,17 @@
         "baths": "Baths",
         "viewDetails": "Explore Property",
         "featured": "Featured Property"
-    },
-    "hero": {
+    },    "filters": {
+        "transaction": "Transaction type",
+        "sale": "Buy",
+        "rent": "Rent",
+        "all": "All",
+        "location": "Location",
+        "locationPlaceholder": "Geneva, Montreux, Lausanne...",
+        "budget": "Budget",
+        "budgetMin": "Minimum budget",
+        "budgetMax": "Maximum budget"
+    },    "hero": {
         "title": "Léman Property Prestige",
         "cta": "Browse our listings"
     },

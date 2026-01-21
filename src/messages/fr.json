@@ -16,6 +16,17 @@
         "viewDetails": "Explorer le bien",
         "featured": "Propriété Vedette"
     },
+    "filters": {
+        "transaction": "Type de transaction",
+        "sale": "Achat",
+        "rent": "Location",
+        "all": "Tous",
+        "location": "Localisation",
+        "locationPlaceholder": "Genève, Montreux, Lausanne...",
+        "budget": "Budget",
+        "budgetMin": "Budget minimum",
+        "budgetMax": "Budget maximum"
+    },
     "hero": {
         "title": "Léman Property Prestige",
         "cta": "Découvrir nos biens"

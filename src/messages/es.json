@@ -16,6 +16,17 @@
         "viewDetails": "Explorar Propiedad",
         "featured": "Propiedad Destacada"
     },
+    "filters": {
+        "transaction": "Tipo de transacción",
+        "sale": "Comprar",
+        "rent": "Alquilar",
+        "all": "Todos",
+        "location": "Ubicación",
+        "locationPlaceholder": "Ginebra, Montreux, Lausana...",
+        "budget": "Presupuesto",
+        "budgetMin": "Presupuesto mínimo",
+        "budgetMax": "Presupuesto máximo"
+    },
     "hero": {
         "title": "Léman Property Prestige",
         "cta": "Ver propiedades"
