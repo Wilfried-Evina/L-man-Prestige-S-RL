@@ -249,60 +249,131 @@
 
 @media (max-width: 768px) {
     .footer {
-        padding: 3rem 0 0;
-        margin-top: 3rem;
+        padding: 2.5rem 0 0;
+        margin-top: 2rem;
     }
 
     .footerContainer {
-        padding: 0 1.5rem;
+        padding: 0 1rem;
     }
 
     .footerContent {
-        gap: 2rem;
-        margin-bottom: 2rem;
-        padding-bottom: 2rem;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
+    .footerColumn {
+        text-align: left;
     }
 
     .footerTitle {
+        font-size: 0.65rem;
+        margin-bottom: 0.875rem;
+        letter-spacing: 0.15em;
+    }
+
+    .footerLinks a {
+        font-size: 0.8rem;
+    }
+
+    .footerLinks li {
+        margin-bottom: 0.5rem;
+    }
+
+    .footerContact {
+        font-size: 0.8rem;
+        line-height: 1.8;
+    }
+
+    .contactLabel {
+        font-size: 0.65rem;
+        min-width: 70px;
+    }
+
+    .socialLabel {
         font-size: 0.6rem;
-        margin-bottom: 1rem;
+        margin: 1.25rem 0 0.75rem;
     }
 
     .socialIcons {
-        gap: 0.6rem;
+        gap: 0.5rem;
+        margin-top: 0.75rem;
     }
 
     .socialIcon {
-        width: 36px;
-        height: 36px;
+        width: 34px;
+        height: 34px;
     }
 
     .socialIcon svg {
-        width: 16px;
-        height: 16px;
+        width: 15px;
+        height: 15px;
+    }
+
+    .footerDisclaimer {
+        padding: 1rem 0;
+    }
+
+    .footerDisclaimer p {
+        font-size: 0.7rem;
+        padding: 0 0.5rem;
+    }
+
+    .footerBottom {
+        padding: 1.25rem;
+    }
+
+    .copyright {
+        font-size: 0.65rem;
+        letter-spacing: 0.1em;
     }
 }
 
 @media (max-width: 480px) {
+    .footer {
+        padding: 2rem 0 0;
+        margin-top: 1.5rem;
+    }
+
+    .footerContainer {
+        padding: 0 0.75rem;
+    }
+
     .footerContent {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.75rem;
+        text-align: center;
+    }
+
+    .footerColumn {
+        text-align: center;
+    }
+
+    .footerLinks a {
+        font-size: 0.85rem;
     }
 
     .contactLabel {
         display: block;
         margin-bottom: 0.25rem;
+        min-width: unset;
     }
 
     .footerContact p {
-        margin: 1rem 0;
+        margin: 0.75rem 0;
+    }
+
+    .socialIcons {
+        justify-content: center;
     }
 
     .footerBottom {
-        padding: 1.5rem;
+        padding: 1.25rem 0.75rem;
     }
 
     .copyright {
-        font-size: 0.7rem;
+        font-size: 0.6rem;
     }
 }

@@ -46,11 +46,11 @@ const PropertyFilters: React.FC<PropertyFiltersProps> = ({
     };
 
     return (
-        <div className="w-full p-4 sm:p-6 md:p-8 rounded-sm">
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
+        <div className="w-full p-3 sm:p-4 md:p-6 lg:p-8 rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 md:gap-5 lg:gap-6">
                 {/* Transaction Type */}
-                <div className="flex flex-col gap-2 w-full group">
-                    <label className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-black text-white group-focus-within:text-[#C5A059] transition-colors duration-500 min-h-[24px] sm:min-h-[32px] flex items-end">
+                <div className="flex flex-col gap-1.5 sm:gap-2 w-full group">
+                    <label className="text-[8px] sm:text-[9px] md:text-[10px] uppercase tracking-[0.2em] sm:tracking-[0.3em] md:tracking-[0.4em] font-black text-white group-focus-within:text-[#C5A059] transition-colors duration-500 min-h-[20px] sm:min-h-[24px] md:min-h-[32px] flex items-end">
                         {translations.transaction}
                     </label>
                     <select
@@ -58,15 +58,16 @@ const PropertyFilters: React.FC<PropertyFiltersProps> = ({
                         onChange={(e) =>
                             handleFilterChange('transaction', e.target.value)
                         }
-                        className="w-full px-0 py-3 bg-transparent border-b border-white/10 text-white focus:border-[#C5A059] focus:outline-none transition-all duration-700 cursor-pointer"
+                        className="w-full px-0 py-2.5 sm:py-3 bg-transparent border-b border-white/10 text-white text-sm sm:text-base focus:border-[#C5A059] focus:outline-none transition-all duration-700 cursor-pointer"
+                        style={{ fontSize: '16px' }}
                     >
-                        <option value="all" className="bg-black text-white">
+                        <option value="all" className="bg-[#051622] text-white">
                             {translations.all}
                         </option>
-                        <option value="sale" className="bg-black text-white">
+                        <option value="sale" className="bg-[#051622] text-white">
                             {translations.sale}
                         </option>
-                        <option value="rent" className="bg-black text-white">
+                        <option value="rent" className="bg-[#051622] text-white">
                             {translations.rent}
                         </option>
                     </select>
