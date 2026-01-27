@@ -1,0 +1,192 @@
+.devisPage {
+    background: linear-gradient(135deg, #051622 0%, #0a2a43 100%);
+    padding: 6rem 1rem;
+    min-height: 100vh;
+}
+
+.devisContainer {
+    max-width: 900px;
+    margin: 0 auto;
+    background: rgba(10, 42, 67, 0.5);
+    border-radius: 12px;
+    padding: 3rem;
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 3rem;
+}
+
+.title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 5vw, 3rem);
+    font-weight: 700;
+    color: #fff;
+    background: linear-gradient(135deg, #c5a059, #e8d4a8);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0;
+}
+
+.subtitle {
+    font-size: 1.1rem;
+    color: rgba(255, 255, 255, 0.7);
+    max-width: 600px;
+    margin: 0.5rem auto 0;
+}
+
+.form {
+    display: grid;
+    gap: 1.5rem;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+.fullWidth {
+    grid-column: 1 / -1;
+}
+
+.inputGroup {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 0.5rem;
+}
+
+.input,
+.select,
+.textarea {
+    background: rgba(5, 22, 34, 0.7);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 6px;
+    padding: 0.75rem 1rem;
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input:focus,
+.select:focus,
+.textarea:focus {
+    outline: none;
+    border-color: var(--color-accent);
+    box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.2);
+}
+
+.textarea {
+    min-height: 120px;
+    resize: vertical;
+}
+
+.checkboxContainer {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.checkbox {
+    width: 1.25rem;
+    height: 1.25rem;
+    background-color: rgba(5, 22, 34, 0.7);
+    border: 1px solid rgba(197, 160, 89, 0.3);
+    border-radius: 4px;
+    cursor: pointer;
+    appearance: none;
+    -webkit-appearance: none;
+    position: relative;
+}
+
+.checkbox:checked {
+    background-color: var(--color-accent);
+    border-color: var(--color-accent);
+}
+
+.checkbox:checked::before {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--color-primary);
+    font-size: 0.875rem;
+    font-weight: bold;
+}
+
+.checkboxLabel {
+    font-size: 0.875rem;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.checkboxLabel a {
+    color: var(--color-accent);
+    text-decoration: underline;
+}
+
+.submitButton {
+    background: var(--color-accent);
+    color: var(--color-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    padding: 0.875rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: none;
+    width: 100%;
+}
+
+.submitButton:hover {
+    background: #d4b375;
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(197, 160, 89, 0.2);
+}
+
+.submitButton:disabled {
+    background: #8a724a;
+    cursor: not-allowed;
+}
+
+.successContainer {
+    text-align: center;
+    padding: 4rem 2rem;
+    background: rgba(10, 42, 67, 0.5);
+    border: 1px solid rgba(197, 160, 89, 0.2);
+    border-radius: 12px;
+}
+
+.successIcon {
+    font-size: 4rem;
+    margin-bottom: 1.5rem;
+}
+
+.successTitle {
+    font-family: var(--font-heading);
+    font-size: 1.75rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+}
+
+.successMessage {
+    color: rgba(255, 255, 255, 0.8);
+}
+
+@media (max-width: 768px) {
+    .devisContainer {
+        padding: 2rem;
+    }
+    .grid {
+        grid-template-columns: 1fr;
+    }
+}

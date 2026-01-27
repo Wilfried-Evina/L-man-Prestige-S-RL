@@ -1,0 +1,82 @@
+{
+    "header": {
+        "properties": "Propiedades",
+        "services": "Servicios",
+        "about": "Acerca de",
+        "contact": "Contacto"
+    },
+    "properties": {
+        "title": "Nuestra colección",
+        "subtitle": "El arte de vivir de forma excepcional: una colección privada de residencias exclusivas en el corazón del Lago Lemán.",
+        "sale": "Venta",
+        "rent": "Alquiler",
+        "sqm": "m²",
+        "rooms": "Habitaciones",
+        "baths": "Baños",
+        "viewDetails": "Explorar Propiedad",
+        "featured": "Propiedad Destacada",
+        "noResults": "No se encontraron propiedades que coincidan con sus criterios."
+    },
+    "filters": {
+        "transaction": "Tipo de transacción",
+        "sale": "Comprar",
+        "rent": "Alquilar",
+        "all": "Todos",
+        "location": "Ubicación",
+        "locationPlaceholder": "Ginebra, Montreux, Lausana...",
+        "budget": "Presupuesto",
+        "budgetMin": "Presupuesto mínimo",
+        "budgetMax": "Presupuesto máximo"
+    },
+    "services": {
+        "title": "Nuestros Servicios Premium",
+        "subtitle": "Acompañamiento a medida para su patrimonio y su instalación.",
+        "discover": "Descubrir servicio",
+        "search": {
+            "title": "Búsqueda de Propiedades y Contacto",
+            "subtitle": "Su cazador de propiedades personal en Ginebra.",
+            "description": "Activamos nuestra red exclusiva para encontrar la propiedad que se ajuste perfectamente a sus criterios, a menudo antes de que llegue al mercado.",
+            "features": {
+                "network": "Acceso al mercado 'Off-Market'",
+                "selection": "Selección rigurosa",
+                "negotiation": "Negociación experta"
+            },
+            "cta": "Iniciar una búsqueda"
+        },
+        "relocation": {
+            "title": "Relocalización y Conserjería",
+            "subtitle": "Instalarse en Suiza con total tranquilidad.",
+            "description": "Facilitamos todos sus trámites administrativos para usted y su familia: permisos de residencia, seguros, escuelas y mucho más.",
+            "features": {
+                "admin": "Trámites administrativos y Permisos",
+                "insurance": "Conexión con Seguros (Salud, RC)",
+                "settling": "Instalación y Servicio de Bienvenida"
+            },
+            "cta": "Solicitar acompañamiento"
+        }
+    },
+    "hero": {
+        "title": "Léman Property Prestige",
+        "cta": "Ver propiedades"
+    },
+    "footer": {
+        "services": "Servicios",
+        "sales": "Venta",
+        "rental": "Alquiler",
+        "management": "Gestión",
+        "about": "Acerca de",
+        "ourStory": "Nuestra historia",
+        "team": "Equipo",
+        "careers": "Carreras",
+        "legal": "Legal",
+        "terms": "Términos",
+        "privacy": "Privacidad",
+        "legalNotice": "Aviso legal",
+        "contact": "Contacto",
+        "email": "Email",
+        "phone": "Teléfono",
+        "address": "Dirección",
+        "followUs": "Síguenos",
+        "copyright": "© {year} Léman Prestige SÀRL. Todos los derechos reservados."
+    }
+}

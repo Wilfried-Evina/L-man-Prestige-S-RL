@@ -1,0 +1,82 @@
+{
+    "header": {
+        "properties": "Properties",
+        "services": "Services",
+        "about": "About",
+        "contact": "Contact"
+    },
+    "properties": {
+        "title": "Our Collection",
+        "subtitle": "The art of exceptional living: a private collection of rare residences in the heart of the Lake Geneva basin.",
+        "sale": "For Sale",
+        "rent": "For Rent",
+        "sqm": "sqm",
+        "rooms": "Rooms",
+        "baths": "Baths",
+        "viewDetails": "Explore Property",
+        "featured": "Featured Property",
+        "noResults": "No properties found matching your criteria."
+    },
+    "filters": {
+        "transaction": "Transaction type",
+        "sale": "Buy",
+        "rent": "Rent",
+        "all": "All",
+        "location": "Location",
+        "locationPlaceholder": "Geneva, Montreux, Lausanne...",
+        "budget": "Budget",
+        "budgetMin": "Minimum budget",
+        "budgetMax": "Maximum budget"
+    },
+    "services": {
+        "title": "Our Premium Services",
+        "subtitle": "Tailor-made support for your assets and your relocation.",
+        "discover": "Discover Service",
+        "search": {
+            "title": "Property Search & Match",
+            "subtitle": "Your personal property hunter in Geneva.",
+            "description": "We activate our exclusive network to find the property that perfectly matches your criteria, often before it even hits the market.",
+            "features": {
+                "network": "Access to 'Off-Market' properties",
+                "selection": "Rigorous selection",
+                "negotiation": "Expert negotiation"
+            },
+            "cta": "Start a search"
+        },
+        "relocation": {
+            "title": "Relocation & Concierge",
+            "subtitle": "Settling in Switzerland with peace of mind.",
+            "description": "We facilitate all your administrative procedures for you and your family: residence permits, insurance, schools, and much more.",
+            "features": {
+                "admin": "Administrative Procedures & Permits",
+                "insurance": "Insurance Connection (Health, Liability)",
+                "settling": "Settling in & Welcome Service"
+            },
+            "cta": "Request support"
+        }
+    },
+    "hero": {
+        "title": "Léman Property Prestige",
+        "cta": "Browse our listings"
+    },
+    "footer": {
+        "services": "Services",
+        "sales": "Sales",
+        "rental": "Rentals",
+        "management": "Management",
+        "about": "About",
+        "ourStory": "Our story",
+        "team": "Team",
+        "careers": "Careers",
+        "legal": "Legal",
+        "terms": "Terms",
+        "privacy": "Privacy",
+        "legalNotice": "Legal notice",
+        "contact": "Contact",
+        "email": "Email",
+        "phone": "Phone",
+        "address": "Address",
+        "followUs": "Follow us",
+        "copyright": "© {year} Léman Prestige SÀRL. All rights reserved."
+    }
+}
