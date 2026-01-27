@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { useSearchParams } from 'next/navigation';
+import styles from './DevisPage.module.css';
 
 export default function DevisPage() {
     const t = useTranslations('devis');
@@ -24,6 +25,7 @@ export default function DevisPage() {
 
     const [isSubmitting, setIsSubmitting] = useState(false);
     const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
+    const [focusedField, setFocusedField] = useState<string | null>(null);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
         const { name, value, type } = e.target;
@@ -32,11 +34,12 @@ export default function DevisPage() {
         // Validation spéciale pour le champ date
         if (name === 'date' && value) {
             const selectedDate = new Date(value);
-            const year = selectedDate.getFullYear();
+            const todayDate = new Date();
+            todayDate.setHours(0, 0, 0, 0);
 
-            // Limiter les années entre 2024 et 2030
-            if (year < 2024 || year > 2030) {
-                return; // Ne pas mettre à jour si l'année est invalide
+            // Ne pas autoriser les dates antérieures à aujourd'hui
+            if (selectedDate < todayDate || selectedDate.getFullYear() > 2030) {
+                return; // Ne pas mettre à jour si la date est invalide
             }
         }
 
@@ -58,6 +61,9 @@ export default function DevisPage() {
         setIsSubmitting(false);
     };
 
+    // Date minimum = aujourd'hui
+    const today = new Date().toISOString().split('T')[0];
+    
     const serviceOptions = [
         { value: '', label: t('form.serviceOptions.select') },
         { value: 'travaux', label: t('form.serviceOptions.travaux') },
@@ -74,14 +80,27 @@ export default function DevisPage() {
 
     if (submitStatus === 'success') {
         return (
-            <div className="min-h-screen bg-[#051622] pt-32 pb-32">
-                <div className="max-w-[800px] mx-auto px-4 md:px-12">
-                    <div className="text-center p-12 border border-[#C5A059]/30 rounded-[4px] bg-[#C5A059]/5">
-                        <span className="text-6xl mb-6 block">✅</span>
-                        <h2 className="text-white text-2xl font-bold mb-4">{t('form.success')}</h2>
-                        <p className="text-white/70">
-                            Nous avons bien reçu votre demande et vous recontacterons très rapidement.
-                        </p>
+            <div className={styles.devisPage}>
+                <div className={styles.successContainer}>
+                    <div className={styles.successIconWrapper}>
+                        <div className={styles.successIconCircle}>
+                            <svg className={styles.successCheck} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                                <polyline points="20 6 9 17 4 12"></polyline>
+                            </svg>
+                        </div>
+                        <div className={styles.successRipple}></div>
+                    </div>
+                    <h2 className={styles.successTitle}>{t('form.success')}</h2>
+                    <p className={styles.successMessage}>
+                        Nous avons bien reçu votre demande et vous recontacterons très rapidement.
+                    </p>
+                    <div className={styles.successDetails}>
+                        <div className={styles.successDetailItem}>
+                            <span>Confirmation envoyée à {formData.email}</span>
+                        </div>
+                        <div className={styles.successDetailItem}>
+                            <span>Réponse sous 24-48h</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -89,184 +108,274 @@ export default function DevisPage() {
     }
 
     return (
-        <div className="min-h-screen bg-[#051622] flex items-center justify-center p-4">
-            <div className="w-full max-w-[800px] mx-auto">
+        <div className={styles.devisPage}>
+            {/* Decorative elements */}
+            <div className={styles.decorativeOrb1}></div>
+            <div className={styles.decorativeOrb2}></div>
+            
+            <div className={styles.devisContainer}>
                 {/* Header */}
-                <div className="flex flex-col gap-4 mb-12 text-center">
-                    <h1 className="text-white text-4xl md:text-5xl font-bold tracking-tight">
-                        {t('title')}
-                    </h1>
-                    <p className="text-white/70 text-lg">
-                        {t('subtitle')}
-                    </p>
+                <div className={styles.header}>
+                    <div className={styles.headerBadge}>
+                        <span>Demande personnalisée</span>
+                    </div>
+                    <h1 className={styles.title}>{t('title')}</h1>
+                    <p className={styles.subtitle}>{t('subtitle')}</p>
+                    <div className={styles.headerDivider}>
+                        <span className={styles.dividerLine}></span>
+                        <span className={styles.dividerIcon}>◆</span>
+                        <span className={styles.dividerLine}></span>
+                    </div>
+                </div>
+
+                {/* Progress indicator */}
+                <div className={styles.progressContainer}>
+                    <div className={styles.progressStep}>
+                        <div className={`${styles.progressDot} ${styles.active}`}>1</div>
+                        <span className={styles.progressLabel}>Informations</span>
+                    </div>
+                    <div className={styles.progressLine}></div>
+                    <div className={styles.progressStep}>
+                        <div className={`${styles.progressDot} ${formData.service ? styles.active : ''}`}>2</div>
+                        <span className={styles.progressLabel}>Service</span>
+                    </div>
+                    <div className={styles.progressLine}></div>
+                    <div className={styles.progressStep}>
+                        <div className={`${styles.progressDot} ${formData.description ? styles.active : ''}`}>3</div>
+                        <span className={styles.progressLabel}>Détails</span>
+                    </div>
                 </div>
 
                 {/* Form */}
-                <form onSubmit={handleSubmit} className="flex flex-col gap-6">
-                    {/* Name */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.firstName')} *
-                            </label>
-                            <input
-                                type="text"
-                                name="firstName"
-                                value={formData.firstName}
-                                onChange={handleChange}
-                                required
-                                className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
-                            />
+                <form onSubmit={handleSubmit} className={styles.form}>
+                    {/* Section: Informations personnelles */}
+                    <div className={styles.formSection}>
+                        <h3 className={styles.sectionTitle}>
+                            Informations personnelles
+                        </h3>
+                        
+                        <div className={styles.grid}>
+                            <div className={`${styles.inputGroup} ${focusedField === 'firstName' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.firstName')} <span className={styles.required}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="firstName"
+                                    value={formData.firstName}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('firstName')}
+                                    onBlur={() => setFocusedField(null)}
+                                    required
+                                    placeholder="Jean"
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div className={`${styles.inputGroup} ${focusedField === 'lastName' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.lastName')} <span className={styles.required}>*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    name="lastName"
+                                    value={formData.lastName}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('lastName')}
+                                    onBlur={() => setFocusedField(null)}
+                                    required
+                                    placeholder="Dupont"
+                                    className={styles.input}
+                                />
+                            </div>
                         </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.lastName')} *
+
+                        <div className={styles.grid}>
+                            <div className={`${styles.inputGroup} ${focusedField === 'email' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.email')} <span className={styles.required}>*</span>
+                                </label>
+                                <input
+                                    type="email"
+                                    name="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('email')}
+                                    onBlur={() => setFocusedField(null)}
+                                    required
+                                    placeholder="jean.dupont@email.com"
+                                    className={styles.input}
+                                />
+                            </div>
+                            <div className={`${styles.inputGroup} ${focusedField === 'phone' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.phone')} <span className={styles.required}>*</span>
+                                </label>
+                                <input
+                                    type="tel"
+                                    name="phone"
+                                    value={formData.phone}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('phone')}
+                                    onBlur={() => setFocusedField(null)}
+                                    required
+                                    placeholder="+41 79 123 45 67"
+                                    className={styles.input}
+                                />
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Section: Service souhaité */}
+                    <div className={styles.formSection}>
+                        <h3 className={styles.sectionTitle}>
+                            Service souhaité
+                        </h3>
+                        
+                        <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'service' ? styles.focused : ''}`}>
+                            <label className={styles.label}>
+                                {t('form.service')} <span className={styles.required}>*</span>
+                            </label>
+                            <div className={styles.selectWrapper}>
+                                <select
+                                    name="service"
+                                    value={formData.service}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('service')}
+                                    onBlur={() => setFocusedField(null)}
+                                    required
+                                    className={styles.select}
+                                >
+                                    {serviceOptions.map(option => (
+                                        <option key={option.value} value={option.value}>
+                                            {option.label}
+                                        </option>
+                                    ))}
+                                </select>
+                                <span className={styles.selectArrow}>▼</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* Section: Localisation */}
+                    <div className={styles.formSection}>
+                        <h3 className={styles.sectionTitle}>
+                            Localisation
+                        </h3>
+                        
+                        <div className={styles.grid}>
+                            <div className={`${styles.inputGroup} ${focusedField === 'address' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.address')}
+                                </label>
+                                <input
+                                    type="text"
+                                    name="address"
+                                    value={formData.address}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('address')}
+                                    onBlur={() => setFocusedField(null)}
+                                    placeholder="Rue de Lausanne 42"
+                                    className={styles.input}
+                                />
+                            </div>
+                                <div className={`${styles.inputGroup} ${focusedField === 'city' ? styles.focused : ''}`}>
+                                <label className={styles.label}>
+                                    {t('form.city')}
+                                </label>
+                                <input
+                                    type="text"
+                                    name="city"
+                                    value={formData.city}
+                                    onChange={handleChange}
+                                    onFocus={() => setFocusedField('city')}
+                                    onBlur={() => setFocusedField(null)}
+                                    placeholder="Genève"
+                                    className={styles.input}
+                                />
+                            </div>
+                        </div>
+
+                        <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'date' ? styles.focused : ''}`}>
+                            <label className={styles.label}>
+                                {t('form.date')}
                             </label>
                             <input
-                                type="text"
-                                name="lastName"
-                                value={formData.lastName}
+                                type="date"
+                                name="date"
+                                value={formData.date}
                                 onChange={handleChange}
-                                required
-                                className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
+                                onFocus={() => setFocusedField('date')}
+                                onBlur={() => setFocusedField(null)}
+                                min={today}
+                                max="2030-12-31"
+                                className={styles.input}
                             />
                         </div>
                     </div>
 
-                    {/* Contact */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.email')} *
+                    {/* Section: Détails du projet */}
+                    <div className={styles.formSection}>
+                        <h3 className={styles.sectionTitle}>
+                            Détails du projet
+                        </h3>
+                        
+                        <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'description' ? styles.focused : ''}`}>
+                            <label className={styles.label}>
+                                {t('form.description')} <span className={styles.required}>*</span>
                             </label>
-                            <input
-                                type="email"
-                                name="email"
-                                value={formData.email}
+                            <textarea
+                                name="description"
+                                value={formData.description}
                                 onChange={handleChange}
+                                onFocus={() => setFocusedField('description')}
+                                onBlur={() => setFocusedField(null)}
                                 required
-                                className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
+                                rows={5}
+                                placeholder="Décrivez votre projet en détail : superficie, type de bien, contraintes particulières..."
+                                className={styles.textarea}
                             />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.phone')} *
-                            </label>
-                            <input
-                                type="tel"
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
-                                required
-                                className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
-                            />
+                            <span className={styles.charCount}>{formData.description.length} caractères</span>
                         </div>
                     </div>
 
-                    {/* Service */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-white text-sm uppercase tracking-widest text-center">
-                            {t('form.service')} *
-                        </label>
-                        <select
-                            name="service"
-                            value={formData.service}
-                            onChange={handleChange}
-                            required
-                            className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
+                    {/* Privacy & Submit */}
+                    <div className={styles.submitSection}>
+                        <div className={styles.checkboxContainer}>
+                            <input
+                                type="checkbox"
+                                name="privacy"
+                                id="privacy"
+                                checked={formData.privacy}
+                                onChange={handleChange}
+                                required
+                                className={styles.checkbox}
+                            />
+                            <label htmlFor="privacy" className={styles.checkboxLabel}>
+                                {t('form.privacy')} <span className={styles.required}>*</span>
+                            </label>
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isSubmitting}
+                            className={styles.submitButton}
                         >
-                            {serviceOptions.map(option => (
-                                <option key={option.value} value={option.value} className="bg-[#051622]">
-                                    {option.label}
-                                </option>
-                            ))}
-                        </select>
-                    </div>
+                            {isSubmitting ? (
+                                <span className={styles.buttonLoading}>
+                                    <span className={styles.spinner}></span>
+                                    Envoi en cours...
+                                </span>
+                            ) : (
+                                <span className={styles.buttonContent}>
+                                    <span>Envoyer ma demande</span>
+                                    <span className={styles.buttonIcon}>→</span>
+                                </span>
+                            )}
+                        </button>
 
-                    {/* Address */}
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.address')}
-                            </label>
-                            <input
-                                type="text"
-                                name="address"
-                                value={formData.address}
-                                onChange={handleChange}
-                                className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
-                            />
-                        </div>
-                        <div className="flex flex-col gap-2">
-                            <label className="text-white text-sm uppercase tracking-widest text-center">
-                                {t('form.city')}
-                            </label>
-                            <input
-                                type="text"
-                                name="city"
-                                value={formData.city}
-                                onChange={handleChange}
-                                className="bg-white/5 border border-white/10 rounded-sm px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors"
-                            />
-                        </div>
-                    </div>
-
-                    {/* Date */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-white text-sm uppercase tracking-widest text-center">
-                            {t('form.date')}
-                        </label>
-                        <input
-                            type="date"
-                            name="date"
-                            value={formData.date}
-                            onChange={handleChange}
-                            min="2024-01-01"
-                            max="2030-12-31"
-                            className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-all duration-300 focus:bg-white/10 focus:shadow-[0_0_20px_rgba(197,160,89,0.2)] text-center hover:border-[#C5A059]/50 [&::-webkit-calendar-picker-indicator]:filter [&::-webkit-calendar-picker-indicator]:brightness-0 [&::-webkit-calendar-picker-indicator]:invert [&::-webkit-calendar-picker-indicator]:sepia [&::-webkit-calendar-picker-indicator]:saturate-[3] [&::-webkit-calendar-picker-indicator]:hue-rotate-[15deg] [&::-webkit-calendar-picker-indicator]:brightness-[1.2] [&::-webkit-calendar-picker-indicator]:cursor-pointer"
-                        />
-                    </div>
-
-                    {/* Description */}
-                    <div className="flex flex-col gap-2">
-                        <label className="text-white text-sm uppercase tracking-widest text-center">
-                            {t('form.description')} *
-                        </label>
-                        <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                            required
-                            rows={5}
-                            className="bg-white/5 border border-white/10 rounded-[4px] px-4 py-3 text-white focus:border-[#C5A059] focus:outline-none transition-colors resize-none"
-                        />
-                    </div>
-
-
-
-                    {/* Privacy */}
-                    <div className="flex items-center justify-center gap-3 w-full">
-                        <input
-                            type="checkbox"
-                            name="privacy"
-                            checked={formData.privacy}
-                            onChange={handleChange}
-                            required
-                            className="w-5 h-5 accent-[#C5A059]"
-                        />
-                        <label className="text-white/70 text-sm">
-                            {t('form.privacy')} *
-                        </label>
-                    </div>
-
-                    <div className="mt-12 flex justify-center">
-                            <button
-                                type="submit"
-                                disabled={isSubmitting}
-                                className="mt-6 bg-[#C5A059] text-white px-6 py-3 text-base uppercase tracking-widest font-medium rounded-[4px] hover:bg-[#C5A059]/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed mx-auto"
-                            >
-                                {isSubmitting ? 'Envoi en cours...' : t('form.submit')}
-                            </button>
+                        <p className={styles.submitNote}>
+                            Vos données sont sécurisées et ne seront jamais partagées.
+                        </p>
                     </div>
                 </form>
             </div>
