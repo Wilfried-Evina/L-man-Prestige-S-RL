@@ -33,9 +33,9 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     const sizes = {
-        sm: 'px-6 py-2 text-[10px] uppercase tracking-[0.2em]',
-        md: 'px-10 py-3.5 text-[11px] uppercase tracking-[0.3em]',
-        lg: 'px-14 py-5 text-[12px] uppercase tracking-[0.4em]',
+        sm: 'px-4 sm:px-6 py-2 text-[9px] sm:text-[10px] uppercase tracking-[0.15em] sm:tracking-[0.2em]',
+        md: 'px-6 sm:px-8 md:px-10 py-3 sm:py-3.5 text-[10px] sm:text-[11px] uppercase tracking-[0.2em] sm:tracking-[0.3em]',
+        lg: 'px-8 sm:px-10 md:px-14 py-4 sm:py-5 text-[10px] sm:text-[11px] md:text-[12px] uppercase tracking-[0.3em] sm:tracking-[0.4em]',
     };
 
     const spinner = (

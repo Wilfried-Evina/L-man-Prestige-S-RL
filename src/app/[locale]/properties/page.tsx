@@ -71,12 +71,12 @@ export default function PropertiesPage() {
     };
 
     return (
-        <div className="min-h-screen bg-[#051622] pt-20 pb-32">
+        <div className="min-h-screen bg-[#051622] pt-16 sm:pt-20 pb-16 sm:pb-24 md:pb-32">
             {/* Header Section */}
-            <section className="max-w-[1800px] mx-auto px-4 md:px-12">
-                <div className="flex flex-col gap-8 w-full">
+            <section className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12">
+                <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 w-full">
                     <div className="max-w-4xl">
-                        <h1 className="text-white text-4xl md:text-5xl lg:text-7xl font-bold tracking-tight leading-tight">
+                        <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold tracking-tight leading-tight">
                             {t('title')}
                         </h1>
                     </div>
@@ -92,11 +92,11 @@ export default function PropertiesPage() {
             </section>
 
             {/* Spacer */}
-            <div className="h-16 w-full" />
+            <div className="h-8 sm:h-12 md:h-16 w-full" />
 
             {/* Grid Section */}
-            <section className="max-w-[1800px] mx-auto px-4 md:px-12">
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8">
+            <section className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12">
+                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
                     {filteredProperties.map((property) => (
                         <PropertyCard key={property.id} property={property} />
                     ))}

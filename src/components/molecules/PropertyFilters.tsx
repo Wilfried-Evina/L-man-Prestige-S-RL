@@ -46,11 +46,11 @@ const PropertyFilters: React.FC<PropertyFiltersProps> = ({
     };
 
     return (
-        <div className="w-full p-8 rounded-sm">
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div className="w-full p-4 sm:p-6 md:p-8 rounded-sm">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                 {/* Transaction Type */}
                 <div className="flex flex-col gap-2 w-full group">
-                    <label className="text-[10px] uppercase tracking-[0.4em] font-black text-white group-focus-within:text-[#C5A059] transition-colors duration-500 min-h-[32px] flex items-end">
+                    <label className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-black text-white group-focus-within:text-[#C5A059] transition-colors duration-500 min-h-[24px] sm:min-h-[32px] flex items-end">
                         {translations.transaction}
                     </label>
                     <select

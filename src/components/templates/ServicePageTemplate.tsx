@@ -27,34 +27,34 @@ export default function ServicePageTemplate({
     disclaimer
 }: ServicePageTemplateProps) {
     return (
-        <div className="min-h-screen bg-[#051622] pt-32 pb-32">
-            <div className="max-w-[1800px] mx-auto px-4 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+        <div className="min-h-screen bg-[#051622] pt-20 sm:pt-24 md:pt-32 pb-16 sm:pb-24 md:pb-32">
+            <div className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
 
                 {/* Text Content */}
-                <div className="flex flex-col gap-8 order-2 lg:order-1">
-                    <div className="flex flex-col gap-4">
-                        <h1 className="text-white text-4xl md:text-6xl font-bold tracking-tight leading-tight">
+                <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 order-2 lg:order-1">
+                    <div className="flex flex-col gap-2 sm:gap-4">
+                        <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-bold tracking-tight leading-tight">
                             {title}
                         </h1>
-                        <p className="text-[#C5A059] text-xl font-light tracking-wide">
+                        <p className="text-[#C5A059] text-base sm:text-lg md:text-xl font-light tracking-wide">
                             {subtitle}
                         </p>
                     </div>
 
-                    <p className="text-white text-lg leading-relaxed max-w-xl">
+                    <p className="text-white text-sm sm:text-base md:text-lg leading-relaxed max-w-xl">
                         {description}
                     </p>
 
                     {/* Features List */}
-                    <ul className="flex flex-col gap-4 border-t border-white/10 pt-8 mt-4">
+                    <ul className="flex flex-col gap-3 sm:gap-4 border-t border-white/10 pt-4 sm:pt-6 md:pt-8 mt-2 sm:mt-4">
                         {features.map((feature, index) => (
-                            <li key={index} className="flex items-start gap-4 group">
-                                <span className="text-[#C5A059] font-serif text-xl">✦</span>
+                            <li key={index} className="flex items-start gap-3 sm:gap-4 group">
+                                <span className="text-[#C5A059] font-serif text-base sm:text-lg md:text-xl">✦</span>
                                 <div className="flex flex-col">
-                                    <span className="text-white font-medium uppercase tracking-widest text-xs">
+                                    <span className="text-white font-medium uppercase tracking-widest text-[10px] sm:text-xs">
                                         {feature.label}
                                     </span>
-                                    <span className="text-white text-sm">
+                                    <span className="text-white text-xs sm:text-sm">
                                         {feature.value}
                                     </span>
                                 </div>
@@ -62,7 +62,7 @@ export default function ServicePageTemplate({
                         ))}
                     </ul>
 
-                    <div className="mt-8">
+                    <div className="mt-4 sm:mt-6 md:mt-8">
                         {ctaHref ? (
                             <Link href={ctaHref}>
                                 <Button variant="primary">
@@ -78,8 +78,8 @@ export default function ServicePageTemplate({
 
                     {/* Disclaimer */}
                     {disclaimer && (
-                        <div className="mt-8 p-4 border border-[#C5A059]/30 rounded-sm bg-[#C5A059]/5">
-                            <p className="text-white/70 text-xs leading-relaxed">
+                        <div className="mt-4 sm:mt-6 md:mt-8 p-3 sm:p-4 border border-[#C5A059]/30 rounded-sm bg-[#C5A059]/5">
+                            <p className="text-white/70 text-[10px] sm:text-xs leading-relaxed">
                                 ⚠️ {disclaimer}
                             </p>
                         </div>
@@ -87,7 +87,7 @@ export default function ServicePageTemplate({
                 </div>
 
                 {/* Visual */}
-                <div className="relative h-[600px] w-full order-1 lg:order-2 overflow-hidden rounded-sm border border-white/5">
+                <div className="relative h-[280px] sm:h-[400px] md:h-[500px] lg:h-[600px] w-full order-1 lg:order-2 overflow-hidden rounded-sm border border-white/5">
                     <Image
                         src={imageSrc}
                         alt={title}
