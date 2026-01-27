@@ -20,11 +20,11 @@ const Input: React.FC<InputProps> = ({
     const inputId = id || generatedId;
 
     return (
-        <div className="flex flex-col gap-2 w-full group">
+        <div className="flex flex-col gap-1.5 sm:gap-2 w-full group">
             {label && (
                 <label
                     htmlFor={inputId}
-                    className="text-[10px] uppercase tracking-[0.4em] font-black text-white/40 group-focus-within:text-[#C5A059] transition-colors duration-500"
+                    className="text-[9px] sm:text-[10px] uppercase tracking-[0.3em] sm:tracking-[0.4em] font-black text-white group-focus-within:text-[#C5A059] transition-colors duration-500 min-h-[24px] sm:min-h-[32px] flex items-end"
                 >
                     {label}
                 </label>
@@ -33,8 +33,9 @@ const Input: React.FC<InputProps> = ({
                 <input
                     id={inputId}
                     className={`
-            w-full px-0 py-3 bg-transparent border-b text-white placeholder:text-white/10
+            w-full px-0 py-2.5 sm:py-3 bg-transparent border-b text-white text-sm sm:text-base placeholder:text-white/50
             transition-all duration-700 focus:outline-none
+            [&:-webkit-autofill]:bg-transparent [&:-webkit-autofill]:[-webkit-box-shadow:0_0_0_30px_#051622_inset] [&:-webkit-autofill]:[-webkit-text-fill-color:#fff]
             ${error
                             ? 'border-red-500/50 focus:border-red-500'
                             : 'border-white/10 focus:border-[#C5A059]'

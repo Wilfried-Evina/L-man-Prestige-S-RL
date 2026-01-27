@@ -5,9 +5,9 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 
 const languages = [
-    { code: 'fr', name: 'Français', flag: '🇨🇭' },
-    { code: 'en', name: 'English', flag: '🇬🇧' },
-    { code: 'es', name: 'Español', flag: '🇪🇸' },
+    { code: 'fr', name: 'FR', fullName: 'Français' },
+    { code: 'en', name: 'EN', fullName: 'English' },
+    { code: 'es', name: 'ES', fullName: 'Español' },
 ];
 
 const LanguageSwitcher: React.FC = () => {
@@ -25,9 +25,17 @@ const LanguageSwitcher: React.FC = () => {
                 setIsOpen(false);
             }
         };
-        document.addEventListener('mousedown', handleClickOutside);
-        return () => document.removeEventListener('mousedown', handleClickOutside);
-    }, []);
+
+        if (isOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside as unknown as EventListener);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside as unknown as EventListener);
+        };
+    }, [isOpen]);
 
     const handleLanguageChange = (code: string) => {
         const newPath = pathname.replace(/^\/(fr|en|es)(?=\/|$)/, `/${code}`);
@@ -38,37 +46,91 @@ const LanguageSwitcher: React.FC = () => {
 
     return (
         <div className="relative" ref={dropdownRef}>
+            {/* Bouton premium avec icône globe */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/10 hover:bg-white/20 transition-all border border-white/20 backdrop-blur-sm"
+                className="group flex items-center gap-1.5 px-3.5 py-2.5 rounded-lg border border-white/10 bg-white/5 hover:bg-white/10 transition-all duration-300 hover:border-[#C5A059]/30 backdrop-blur-sm"
+                aria-label="Changer de langue"
             >
-                <span className="text-xl">{currentLang.flag}</span>
-                <span className="text-sm font-medium uppercase text-white">{currentLang.code}</span>
+                {/* Icône Globe */}
+                <svg 
+                    className="w-4 h-4 text-white/70 group-hover:text-[#C5A059] transition-colors duration-300 group-hover:scale-110 transform" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                >
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M12 21a9 9 0 100-18 9 9 0 000 18z" 
+                    />
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M3.6 9h16.8M3.6 15h16.8" 
+                    />
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z" 
+                    />
+                </svg>
+                
+                {/* Code langue actuel */}
+                <span className="text-xs font-bold uppercase tracking-widest text-white group-hover:text-[#C5A059] transition-colors duration-300">
+                    {currentLang.name}
+                </span>
+                
+                {/* Chevron */}
                 <svg
-                    className={`w-4 h-4 transition-transform duration-300 text-white ${isOpen ? 'rotate-180' : ''}`}
+                    className={`w-3.5 h-3.5 text-white/50 group-hover:text-[#C5A059] transition-all duration-300 ${isOpen ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
                 >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
                 </svg>
             </button>
 
-            {isOpen && (
-                <div className="absolute right-0 mt-2 w-48 rounded-xl bg-[var(--color-primary)] border border-white/10 shadow-2xl overflow-hidden z-50 animate-in fade-in zoom-in-95 duration-200">
-                    {languages.map((lang) => (
+            {/* Dropdown simple et lisible */}
+            <div 
+                className={`absolute right-0 mt-2 min-w-[120px] overflow-hidden z-50 transition-all duration-300 origin-top-right ${
+                    isOpen 
+                        ? 'opacity-100 scale-100 translate-y-0' 
+                        : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                }`}
+            >
+                <div className="bg-[#051622] border border-[#C5A059]/20 rounded-lg shadow-2xl overflow-hidden">
+                    {languages.map((lang, index) => (
                         <button
                             key={lang.code}
                             onClick={() => handleLanguageChange(lang.code)}
-                            className={`w-full flex items-center gap-3 px-4 py-3 text-left hover:bg-white/5 transition-colors ${currentLocale === lang.code ? 'bg-white/10 text-[var(--color-accent)]' : 'text-white'
-                                }`}
+                            className={`w-full flex items-center justify-between px-4 py-3 transition-all duration-200 ${
+                                index !== languages.length - 1 ? 'border-b border-white/5' : ''
+                            } ${
+                                currentLocale === lang.code
+                                    ? 'bg-[#C5A059]/15'
+                                    : 'hover:bg-white/8'
+                            }`}
                         >
-                            <span className="text-2xl">{lang.flag}</span>
-                            <span className="text-sm font-medium">{lang.name}</span>
+                            <span className={`text-sm font-semibold uppercase tracking-wider transition-colors duration-200 ${
+                                currentLocale === lang.code ? 'text-[#C5A059]' : 'text-white/80 hover:text-white'
+                            }`}>
+                                {lang.fullName}
+                            </span>
+                            
+                            {currentLocale === lang.code && (
+                                <svg className="w-3.5 h-3.5 text-[#C5A059]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            )}
                         </button>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };

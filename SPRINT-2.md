@@ -1,53 +1,43 @@
-# Sprint 2 - Léman Prestige S.R.L - Le Catalogue & Les Services
+# Sprint 2 - Léman Prestige S.R.L - Conversion & Services
 
-## 📅 Période : 19 - 25 Janvier 2026
+## 📅 Période : 26 Janvier - 1 Février 2026
 
 ## 🎯 Objectifs du Sprint
-Mise en place du cœur de métier : la galerie des biens immobiliers, la présentation détaillée des services, et l'intégration des premiers outils innovants.
+
+Transformer le site en plateforme de services orientée "Leads" (Devis/WhatsApp/Appel) et intégrer les nouvelles prestations d'Andrés.
 
 ## 📋 Tâches
 
-### Tâche 1 : Catalogue des Propriétés (Grid View)
-- [ ] Créer la page `/properties` avec une mise en page "Editorial Grid".
-- [ ] Développer le composant `<PropertyCard />` (Image HD, Badge "A Vendre/Louer", Localisation, Prix).
-- [ ] Implémenter les animations d'entrée au défilement (Scroll Reveal).
-- [ ] Simuler une base de données locale (JSON) pour alimenter le catalogue.
+### Tâche 1 : Structure & Navigation (Leads Focus) ✅
 
-### Tâche 2 : Système de Filtrage Raffiné
-- [ ] Créer un composant `<PropertyFilter />` (Minimaliste, barre horizontale).
-- [ ] Filtres : Type de transaction, Localisation (Genève, Lausanne, etc.), Budget.
-- [ ] Gestion du filtrage en temps réel sans rechargement de page.
+- [x] Créer l'architecture pour les 11 pages (Accueil, Travaux, Nettoyage, Déménagement, Relocation, Sous-location, Admin, Assurances, Appartements, About, Devis).
+- [x] Implémenter les **Sticky CTAs** mobiles (Boutons flottants Appeler, WhatsApp, Devis).
+- [x] Ajouter les mentions légales de protection dans le Footer et sur les pages sensibles.
 
-### Tâche 3 : Pages de Services (Vente, Location, Gestion)
-- [ ] Créer la structure pour les pages de services à forte valeur ajoutée.
-- [ ] Design narratif : Utiliser de grands visuels et des témoignages clients intégrés.
-- [ ] Ajouter des boutons de "Demande de rappel rapide".
+### Tâche 2 : Contenu des Services (Approche Narrative)
 
-### Tâche 4 : Outils Innovants - Vérification de PDF (Alpha)
-- [ ] Créer la page `/outils/verification-pdf`.
-- [ ] Implémenter une zone de "Drag & Drop" pour les dossiers de location.
-- [ ] Interface de simulation de vérification de crédibilité (UI feedback).
+- [ ] Rédiger et intégrer le contenu détaillé pour les 8 pôles de services (Nettoyage, Travaux, Déménagement, etc.).
+- [ ] Appliquer le design Premium avec de grands visuels et des témoignages (style logiservices.ch).
 
-### Tâche 5 : Authentification & Espace Client (Base)
-- [ ] Mettre en place `next-auth` ou un système de session simple.
-- [ ] Créer les pages `Connexion` et `Inscription` au design Prestige.
-- [ ] Développer la structure du Dashboard (Sidebar + Vue d'ensemble).
+### Tâche 3 : Catalogue Appartements (Annonces)
 
-### Tâche 6 : Communication & Conversion
-- [ ] Intégrer WhatsApp et créer la page de Contact.
-- [ ] Finaliser la présentation des Tarifs (Page dédiée).
+- [ ] Adapter le catalogue pour inclure les statuts : **Disponible / Réservé / Loué**.
+- [ ] Ajouter les boutons de contact directs sur chaque annonce (WhatsApp "Je suis intéressé", Appeler, Visite).
+- [ ] Implémenter le filtrage simple (Pièces, Budget, Ville).
 
-### Tâche 7 : Page de Détail d'un Bien
-- [ ] Créer la page dynamique `/[locale]/properties/[id]`.
-- [ ] Implémenter une galerie d'images avec Slider (Embla o Swiper).
-- [ ] Affichage complet : Description narrative, équipements, carte.
-- [ ] Bouton d'action direct : "Demander une visite privée".
+### Tâche 4 : Formulaire de Devis Général
+
+- [ ] Créer le formulaire général avec liste déroulante des services et upload de photos (optionnel).
+- [ ] Configurer la notification email (Simulation).
 
 ## 🏗️ Architecture & Best Practices
-- **Vitesse** : Priorité au fonctionnel sans sacrifier l'esthétique Luxury.
-- **Réutilisabilité** : Utilisation maximale des atomes créés au Sprint 1.
+
+- **Conversion** : Chaque section doit mener à un CTA.
+- **Vitesse** : Garder le site extrêmement léger malgré les visuels.
 
 ---
+
 ## 📊 État d'avancement
-- **Progression globale** : 🟢 30%
-- **Objectif de fin de semaine** : Site vitrine complet + Accès client fonctionnel.
+
+- **Progression globale** : � 50%
+- **Objectif de fin de semaine** : Structure complète des 11 pages + Catalogue Appartements fonctionnel avec CTAs.

@@ -18,8 +18,13 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "L-man Prestige S.RL",
+  title: "Léman Prestige SÀRL",
   description: "Design System et Architecture moderne",
+  icons: {
+    icon: '/favicon.png',
+    shortcut: '/favicon.png',
+    apple: '/favicon.png',
+  },
 };
 
 export default async function RootLayout({

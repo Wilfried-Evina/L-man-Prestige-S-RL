@@ -1,11 +1,13 @@
 import Hero from '@/app/components/sections/Hero';
-import Footer from '@/app/components/sections/Footer';
+import ServicesHighlight from '@/app/components/sections/ServicesHighlight';
+import ProcessSection from '@/app/components/sections/ProcessSection';
 
 export default function Page() {
   return (
     <main>
       <Hero />
-      <Footer />
+      <ServicesHighlight />
+      <ProcessSection />
     </main>
   );
 }

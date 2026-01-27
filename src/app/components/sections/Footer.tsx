@@ -1,6 +1,7 @@
 'use client';
 
-import { useTranslations } from '@/hooks/useTranslations';
+import { useTranslations } from 'next-intl';
+import Link from 'next/link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
@@ -8,10 +9,24 @@ export default function Footer() {
 
   const currentYear = new Date().getFullYear();
 
-  // Menu columns with translation keys
-  const servicesLinks = ['footer.sales', 'footer.rental', 'footer.management'];
-  const aboutLinks = ['footer.ourStory', 'footer.team', 'footer.careers'];
-  const legalLinks = ['footer.terms', 'footer.privacy', 'footer.legalNotice'];
+  // Menu columns with services links
+  const servicesLinks = [
+    { key: 'footer.sales', href: '/fr/services/travaux' },
+    { key: 'footer.rental', href: '/fr/services/nettoyage' },
+    { key: 'footer.management', href: '/fr/services/demenagement' },
+    { key: 'footer.relocation', href: '/fr/services/relocation' },
+  ];
+  
+  const aboutLinks = [
+    { key: 'footer.ourStory', href: '/fr/about' },
+    { key: 'footer.careers', href: '/fr/devis' },
+  ];
+  
+  const legalLinks = [
+    { key: 'footer.terms', href: '/fr/mentions-legales' },
+    { key: 'footer.privacy', href: '/fr/confidentialite' },
+    { key: 'footer.legalNotice', href: '/fr/mentions-legales' },
+  ];
 
   return (
     <footer className={styles.footer}>
@@ -24,7 +39,7 @@ export default function Footer() {
             <ul className={styles.footerLinks}>
               {servicesLinks.map((link, idx) => (
                 <li key={idx}>
-                  <a href="#">{t(link)}</a>
+                  <Link href={link.href}>{t(link.key)}</Link>
                 </li>
               ))}
             </ul>
@@ -36,7 +51,7 @@ export default function Footer() {
             <ul className={styles.footerLinks}>
               {aboutLinks.map((link, idx) => (
                 <li key={idx}>
-                  <a href="#">{t(link)}</a>
+                  <Link href={link.href}>{t(link.key)}</Link>
                 </li>
               ))}
             </ul>
@@ -48,7 +63,7 @@ export default function Footer() {
             <ul className={styles.footerLinks}>
               {legalLinks.map((link, idx) => (
                 <li key={idx}>
-                  <a href="#">{t(link)}</a>
+                  <Link href={link.href}>{t(link.key)}</Link>
                 </li>
               ))}
             </ul>
@@ -64,7 +79,7 @@ export default function Footer() {
               </p>
               <p>
                 <span className={styles.contactLabel}>{t('footer.phone')}:</span>
-                <a href="tel:+41225551234">+41 22 555 1234</a>
+                <a href="tel:+41XXXXXXXXX">+41 XX XXX XX XX</a>
               </p>
               <p>
                 <span className={styles.contactLabel}>{t('footer.address')}:</span>
@@ -90,12 +105,17 @@ export default function Footer() {
             </div>
           </div>
         </div>
+
+        {/* Legal Disclaimer */}
+        <div className={styles.footerDisclaimer}>
+          <p>{t('footer.disclaimer')}</p>
+        </div>
       </div>
 
       {/* Footer Bottom */}
       <div className={styles.footerBottom}>
         <p className={styles.copyright}>
-          {t('footer.copyright').replace('{year}', String(currentYear))}
+          {t('footer.copyright', { year: currentYear })}
         </p>
       </div>
     </footer>
