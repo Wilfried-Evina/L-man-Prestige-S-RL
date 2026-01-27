@@ -5,9 +5,9 @@ import { useRouter, usePathname } from 'next/navigation';
 import { useLocale } from 'next-intl';
 
 const languages = [
-    { code: 'fr', name: 'Français', flag: '🇨🇭', country: 'CH' },
-    { code: 'en', name: 'English', flag: '🇬🇧', country: 'GB' },
-    { code: 'es', name: 'Español', flag: '🇪🇸', country: 'ES' },
+    { code: 'fr', name: 'FR', fullName: 'Français' },
+    { code: 'en', name: 'EN', fullName: 'English' },
+    { code: 'es', name: 'ES', fullName: 'Español' },
 ];
 
 const LanguageSwitcher: React.FC = () => {
@@ -28,12 +28,12 @@ const LanguageSwitcher: React.FC = () => {
 
         if (isOpen) {
             document.addEventListener('mousedown', handleClickOutside);
-            document.addEventListener('touchstart', handleClickOutside as any);
+            document.addEventListener('touchstart', handleClickOutside as unknown as EventListener);
         }
 
         return () => {
             document.removeEventListener('mousedown', handleClickOutside);
-            document.removeEventListener('touchstart', handleClickOutside as any);
+            document.removeEventListener('touchstart', handleClickOutside as unknown as EventListener);
         };
     }, [isOpen]);
 
@@ -46,23 +46,47 @@ const LanguageSwitcher: React.FC = () => {
 
     return (
         <div className="relative" ref={dropdownRef}>
+            {/* Bouton minimaliste avec icône globe */}
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className={`
-                    group flex items-center gap-4 px-6 py-2.5 transition-all duration-500 rounded-full
-                    border border-white/10 bg-white/[0.04] backdrop-blur-xl
-                    hover:border-[#C5A059]/40 hover:bg-white/[0.1] shadow-2xl
-                    ${isOpen ? 'border-[#C5A059]/60 bg-white/[0.15]' : ''}
-                `}
+                className="group flex items-center gap-2 px-3 py-2 transition-all duration-300"
+                aria-label="Changer de langue"
             >
-                <span className="text-2xl grayscale-[0.05] group-hover:grayscale-0 transition-all duration-700 transform group-hover:scale-110">
-                    {currentLang.flag}
+                {/* Icône Globe */}
+                <svg 
+                    className="w-4 h-4 text-white/60 group-hover:text-[#C5A059] transition-colors duration-300" 
+                    fill="none" 
+                    stroke="currentColor" 
+                    viewBox="0 0 24 24"
+                >
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M12 21a9 9 0 100-18 9 9 0 000 18z" 
+                    />
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M3.6 9h16.8M3.6 15h16.8" 
+                    />
+                    <path 
+                        strokeLinecap="round" 
+                        strokeLinejoin="round" 
+                        strokeWidth={1.5} 
+                        d="M12 3a15.3 15.3 0 014 9 15.3 15.3 0 01-4 9 15.3 15.3 0 01-4-9 15.3 15.3 0 014-9z" 
+                    />
+                </svg>
+                
+                {/* Code langue actuel */}
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-white group-hover:text-[#C5A059] transition-colors duration-300">
+                    {currentLang.name}
                 </span>
-                <span className="text-[14px] uppercase tracking-[0.3em] font-bold !text-white group-hover:text-[#C5A059] transition-colors duration-500">
-                    {currentLang.country}
-                </span>
+                
+                {/* Chevron */}
                 <svg
-                    className={`w-4 h-4 transition-all duration-700 !text-white/40 group-hover:!text-[#C5A059] ${isOpen ? 'rotate-180 scale-125' : ''}`}
+                    className={`w-3 h-3 text-white/40 group-hover:text-[#C5A059] transition-all duration-300 ${isOpen ? 'rotate-180' : ''}`}
                     fill="none"
                     stroke="currentColor"
                     viewBox="0 0 24 24"
@@ -71,25 +95,42 @@ const LanguageSwitcher: React.FC = () => {
                 </svg>
             </button>
 
-            {isOpen && (
-                <div className="absolute right-0 mt-2 w-40 rounded bg-[#0B1A23]/95 backdrop-blur-lg border border-white/5 shadow-xl overflow-hidden z-50 animate-in fade-in slide-in-from-top-1 duration-200">
-                    {languages.map((lang) => (
+            {/* Dropdown élégant */}
+            <div 
+                className={`absolute right-0 mt-2 min-w-[120px] overflow-hidden z-50 transition-all duration-300 origin-top-right ${
+                    isOpen 
+                        ? 'opacity-100 scale-100 translate-y-0' 
+                        : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'
+                }`}
+            >
+                <div className="bg-[#051622] border border-[#C5A059]/20 rounded-lg shadow-2xl overflow-hidden">
+                    {languages.map((lang, index) => (
                         <button
                             key={lang.code}
                             onClick={() => handleLanguageChange(lang.code)}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 text-left transition-colors duration-200 ${currentLocale === lang.code
-                                ? 'bg-[#C5A059]/10 text-[#C5A059]'
-                                : 'text-white/70 hover:bg-white/5 hover:text-white'
-                                }`}
+                            className={`w-full flex items-center justify-between px-4 py-3 transition-all duration-200 ${
+                                index !== languages.length - 1 ? 'border-b border-white/5' : ''
+                            } ${
+                                currentLocale === lang.code
+                                    ? 'bg-[#C5A059]/10'
+                                    : 'hover:bg-white/5'
+                            }`}
                         >
-                            <span className="text-base">{lang.flag}</span>
-                            <span className="text-xs uppercase tracking-wide font-medium">
-                                {lang.name}
+                            <span className={`text-[11px] font-medium uppercase tracking-wider ${
+                                currentLocale === lang.code ? 'text-[#C5A059]' : 'text-white/70'
+                            }`}>
+                                {lang.fullName}
                             </span>
+                            
+                            {currentLocale === lang.code && (
+                                <svg className="w-3.5 h-3.5 text-[#C5A059]" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                                </svg>
+                            )}
                         </button>
                     ))}
                 </div>
-            )}
+            </div>
         </div>
     );
 };
