@@ -6,8 +6,8 @@
         "contact": "Contacto"
     },
     "properties": {
-        "title": "Nuestra colección",
-        "subtitle": "El arte de vivir de forma excepcional: una colección privada de residencias exclusivas en el corazón del Lago Lemán.",
+        "title": "Nuestras Propiedades",
+        "subtitle": "Catálogo",
         "sale": "Venta",
         "rent": "Alquiler",
         "sqm": "m²",
@@ -15,18 +15,34 @@
         "baths": "Baños",
         "viewDetails": "Explorar Propiedad",
         "featured": "Propiedad Destacada",
-        "noResults": "No se encontraron propiedades que coincidan con sus criterios."
+        "noResults": "No se encontraron propiedades que coincidan con sus criterios.",
+        "noResultsHint": "Intente ajustar sus filtros",
+        "resultSingular": "propiedad encontrada",
+        "resultPlural": "propiedades encontradas",
+        "statusAvailable": "Disponible",
+        "statusReserved": "Reservado",
+        "statusRented": "Alquilado",
+        "contactWhatsApp": "Estoy interesado",
+        "contactCall": "Llamar",
+        "contactVisit": "Visita"
     },
     "filters": {
-        "transaction": "Tipo de transacción",
+        "transaction": "Tipo",
         "sale": "Comprar",
         "rent": "Alquilar",
         "all": "Todos",
-        "location": "Ubicación",
-        "locationPlaceholder": "Ginebra, Montreux, Lausana...",
+        "city": "Ciudad",
+        "cityPlaceholder": "Todas las ciudades",
+        "rooms": "Habitaciones",
+        "roomsPlaceholder": "Todas",
         "budget": "Presupuesto",
-        "budgetMin": "Presupuesto mínimo",
-        "budgetMax": "Presupuesto máximo"
+        "budgetMin": "Mín (CHF)",
+        "budgetMax": "Máx (CHF)",
+        "status": "Estado",
+        "statusAll": "Todos los estados",
+        "statusAvailable": "Disponible",
+        "statusReserved": "Reservado",
+        "statusRented": "Alquilado"
     },
     "services": {
         "title": "Nuestros Servicios Premium",

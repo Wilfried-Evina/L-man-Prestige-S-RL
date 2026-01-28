@@ -6,8 +6,8 @@
         "contact": "Contact"
     },
     "properties": {
-        "title": "Our Collection",
-        "subtitle": "The art of exceptional living: a private collection of rare residences in the heart of the Lake Geneva basin.",
+        "title": "Our Properties",
+        "subtitle": "Catalog",
         "sale": "For Sale",
         "rent": "For Rent",
         "sqm": "sqm",
@@ -15,18 +15,34 @@
         "baths": "Baths",
         "viewDetails": "Explore Property",
         "featured": "Featured Property",
-        "noResults": "No properties found matching your criteria."
+        "noResults": "No properties found matching your criteria.",
+        "noResultsHint": "Try adjusting your filters",
+        "resultSingular": "property found",
+        "resultPlural": "properties found",
+        "statusAvailable": "Available",
+        "statusReserved": "Reserved",
+        "statusRented": "Rented",
+        "contactWhatsApp": "I'm interested",
+        "contactCall": "Call",
+        "contactVisit": "Visit"
     },
     "filters": {
-        "transaction": "Transaction type",
+        "transaction": "Type",
         "sale": "Buy",
         "rent": "Rent",
         "all": "All",
-        "location": "Location",
-        "locationPlaceholder": "Geneva, Montreux, Lausanne...",
+        "city": "City",
+        "cityPlaceholder": "All cities",
+        "rooms": "Rooms",
+        "roomsPlaceholder": "All",
         "budget": "Budget",
-        "budgetMin": "Minimum budget",
-        "budgetMax": "Maximum budget"
+        "budgetMin": "Min (CHF)",
+        "budgetMax": "Max (CHF)",
+        "status": "Status",
+        "statusAll": "All statuses",
+        "statusAvailable": "Available",
+        "statusReserved": "Reserved",
+        "statusRented": "Rented"
     },
     "services": {
         "title": "Our Premium Services",

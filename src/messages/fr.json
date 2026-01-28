@@ -20,8 +20,8 @@
         "devis": "Demander un Devis"
     },
     "properties": {
-        "title": "Appartements disponibles",
-        "subtitle": "Trouvez votre prochain logement dans la région lémanique. Contactez-nous directement pour organiser une visite.",
+        "title": "Nos Appartements",
+        "subtitle": "Catalogue",
         "sale": "Vente",
         "rent": "Location",
         "sqm": "m²",
@@ -30,33 +30,33 @@
         "viewDetails": "Voir les détails",
         "featured": "Nouveau",
         "noResults": "Aucun appartement ne correspond à vos critères.",
-        "status": {
-            "available": "Disponible",
-            "reserved": "Réservé",
-            "rented": "Loué"
-        },
-        "contact": {
-            "whatsapp": "WhatsApp",
-            "call": "Appeler",
-            "visit": "Demander une visite"
-        },
-        "filters": {
-            "rooms": "Nombre de pièces",
-            "budget": "Budget max",
-            "city": "Ville / Quartier",
-            "all": "Tous"
-        }
+        "noResultsHint": "Essayez de modifier vos filtres",
+        "resultSingular": "bien trouvé",
+        "resultPlural": "biens trouvés",
+        "statusAvailable": "Disponible",
+        "statusReserved": "Réservé",
+        "statusRented": "Loué",
+        "contactWhatsApp": "Je suis intéressé",
+        "contactCall": "Appeler",
+        "contactVisit": "Visite"
     },
     "filters": {
-        "transaction": "Type de transaction",
+        "transaction": "Type",
         "sale": "Achat",
         "rent": "Location",
         "all": "Tous",
-        "location": "Localisation",
-        "locationPlaceholder": "Genève, Montreux, Lausanne...",
+        "city": "Ville",
+        "cityPlaceholder": "Toutes les villes",
+        "rooms": "Pièces",
+        "roomsPlaceholder": "Toutes",
         "budget": "Budget",
-        "budgetMin": "Budget minimum",
-        "budgetMax": "Budget maximum"
+        "budgetMin": "Min (CHF)",
+        "budgetMax": "Max (CHF)",
+        "status": "Statut",
+        "statusAll": "Tous les statuts",
+        "statusAvailable": "Disponible",
+        "statusReserved": "Réservé",
+        "statusRented": "Loué"
     },
     "services": {
         "title": "Nos Services",
