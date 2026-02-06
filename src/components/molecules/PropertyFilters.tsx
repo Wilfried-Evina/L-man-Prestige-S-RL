@@ -25,10 +25,9 @@ interface PropertyFiltersProps {
     };
 }
 
-const PropertyFilters: React.FC<PropertyFiltersProps & { initialValues?: FilterValues }> = ({
+const PropertyFilters: React.FC<PropertyFiltersProps> = ({
     onFilterChange,
     translations,
-    initialValues,
 }) => {
     const [filters, setFilters] = useState<FilterValues>({
         transaction: 'all',
@@ -36,11 +35,6 @@ const PropertyFilters: React.FC<PropertyFiltersProps & { initialValues?: FilterV
         budgetMin: '',
         budgetMax: '',
     });
-
-    // update internal state when parent provides initial values (e.g., from URL)
-    React.useEffect(() => {
-        if (initialValues) setFilters(initialValues);
-    }, [initialValues]);
 
     const handleFilterChange = (
         key: keyof FilterValues,
