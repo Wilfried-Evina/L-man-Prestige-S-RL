@@ -1,14 +1,29 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
-import propertiesData from '@/data/properties.json';
 import { PropertyCard } from '@/components/molecules/PropertyCard';
 import PropertyFilters, { FilterValues } from '@/components/molecules/PropertyFilters';
+
+type Property = {
+    id: string;
+    title: string;
+    location: string;
+    price: string;
+    type: string;
+    sqm: number;
+    rooms: number;
+    baths: number;
+    image: string;
+    description?: string;
+};
 
 export default function PropertiesPage() {
     const t = useTranslations('properties');
     const tFilters = useTranslations('filters');
+
+    const [propertiesData, setPropertiesData] = useState<Property[]>([]);
+    const [loading, setLoading] = useState(true);
 
     const [filters, setFilters] = useState<FilterValues>({
         transaction: 'all',
@@ -16,6 +31,16 @@ export default function PropertiesPage() {
         budgetMin: '',
         budgetMax: '',
     });
+
+    useEffect(() => {
+        fetch('/api/properties')
+            .then(res => res.json())
+            .then(data => {
+                setPropertiesData(data);
+                setLoading(false);
+            })
+            .catch(() => setLoading(false));
+    }, []);
 
     const parsePrice = (priceString: string): number => {
         // Remove 'CHF', '/ mois', commas, and whitespace
@@ -73,7 +98,7 @@ export default function PropertiesPage() {
     return (
         <div className="min-h-screen bg-[#051622] pt-16 sm:pt-20 pb-16 sm:pb-24 md:pb-32">
             {/* Header Section */}
-            <section className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12">
+            <section style={{ marginLeft: '22px', marginRight: '20px' }}>
                 <div className="flex flex-col gap-4 sm:gap-6 md:gap-8 w-full">
                     <div className="max-w-4xl">
                         <h1 className="text-white text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-7xl font-bold tracking-tight leading-tight">
@@ -95,8 +120,11 @@ export default function PropertiesPage() {
             <div className="h-8 sm:h-12 md:h-16 w-full" />
 
             {/* Grid Section */}
-            <section className="max-w-[1800px] mx-auto px-4 sm:px-6 md:px-12">
-                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-4 sm:gap-6 md:gap-8">
+            <section style={{ marginLeft: '18px', marginRight: '20px' }}>
+                {loading ? (
+                    <p className="text-white/60 text-center py-20">Chargement...</p>
+                ) : (
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProperties.map((property) => (
                         <PropertyCard key={property.id} property={property} />
                     ))}
@@ -108,6 +136,7 @@ export default function PropertiesPage() {
                         </div>
                     )}
                 </div>
+                )}
             </section>
         </div>
     );

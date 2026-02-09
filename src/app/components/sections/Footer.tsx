@@ -78,6 +78,10 @@ export default function Footer() {
                 <a href="mailto:info@lemanprestige.com">info@lemanprestige.com</a>
               </p>
               <p>
+                <span className={styles.contactLabel}>Tél:</span>
+                <a href="tel:+41764719130">+41 76 471 91 30</a>
+              </p>
+              <p>
                 <span className={styles.contactLabel}>{t('footer.address')}:</span>
                 <span>Rue de la Servette 11, 1201 Genève</span>
               </p>

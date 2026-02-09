@@ -199,7 +199,9 @@
                 "documents": "Organization and verification of supporting documents",
                 "assistance": "Personalized support for each step"
             },
-            "cta": "Request Administrative Support"
+            "cta": "Request Administrative Support",
+            "cta_title": "Ready to get started?",
+            "cta_description": "Contact us for personalized administrative assistance."
         },
         "assurances": {
             "title": "Insurance & Savings",
@@ -236,7 +238,7 @@
         "call": "Call",
         "whatsapp": "WhatsApp",
         "devis": "Free Quote",
-        "phone": "+41 XX XXX XX XX"
+        "phone": "+41 76 471 91 30"
     },
     "devis": {
         "title": "Request a Quote",

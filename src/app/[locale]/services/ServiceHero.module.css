@@ -103,6 +103,25 @@
     line-height: 1.6;
 }
 
+.heroCta {
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 0.9rem 2.5rem;
+    background: #C5A059;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    letter-spacing: 0.03em;
+    transition: background 0.3s ease, transform 0.3s ease;
+}
+
+.heroCta:hover {
+    background: #b08d48;
+    transform: translateY(-2px);
+}
+
 /* === OFFERING SECTIONS === */
 .offeringSection {
     background: #051622;

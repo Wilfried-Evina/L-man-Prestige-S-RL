@@ -199,7 +199,9 @@
                 "documents": "Organización y verificación de documentos justificativos",
                 "assistance": "Apoyo personalizado para cada paso"
             },
-            "cta": "Solicitar Apoyo Administrativo"
+            "cta": "Solicitar Apoyo Administrativo",
+            "cta_title": "¿Listo para empezar?",
+            "cta_description": "Contáctenos para un apoyo administrativo personalizado."
         },
         "assurances": {
             "title": "Seguros y Previsión",
@@ -236,7 +238,7 @@
         "call": "Llamar",
         "whatsapp": "WhatsApp",
         "devis": "Presupuesto Gratuito",
-        "phone": "+41 XX XXX XX XX"
+        "phone": "+41 76 471 91 30"
     },
     "devis": {
         "title": "Solicitar un Presupuesto",

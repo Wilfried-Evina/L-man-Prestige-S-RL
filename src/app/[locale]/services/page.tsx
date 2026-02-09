@@ -77,7 +77,7 @@ export default function ServicesPage() {
                         <Link
                             href={service.href}
                             key={service.id}
-                            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-white/10 hover:border-[#C5A059]/50 transition-all duration-500"
+                            className="group relative block aspect-[4/3] overflow-hidden rounded-sm border border-white/10 hover:border-[#C5A059]/50 transform-gpu scale-95 hover:scale-100 transition-transform duration-300"
                         >
                             <Image
                                 src={service.image}
@@ -89,8 +89,8 @@ export default function ServicesPage() {
                             {/* Overlay */}
                             <div className="absolute inset-0 bg-gradient-to-t from-[#051622] via-[#051622]/40 to-transparent transition-opacity duration-500" />
 
-                            <div className="absolute bottom-0 left-0 p-4 sm:p-6 w-full">
-                                <h3 className="!text-white text-lg sm:text-xl md:text-2xl font-bold mb-2 group-hover:text-[#C5A059] transition-colors duration-300">
+                            <div className="absolute bottom-0 left-0 p-3 sm:p-4 w-full">
+                                <h3 className="!text-white text-base sm:text-lg md:text-xl font-bold mb-2 group-hover:text-[#C5A059] transition-colors duration-300">
                                     {service.title}
                                 </h3>
                                 <p className="!text-white/70 text-xs sm:text-sm font-light line-clamp-2">

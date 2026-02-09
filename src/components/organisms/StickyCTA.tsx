@@ -10,8 +10,8 @@ interface StickyCTAProps {
 }
 
 export default function StickyCTA({ 
-    phoneNumber = '+41XXXXXXXXX',
-    whatsappNumber = '+41XXXXXXXXX'
+    phoneNumber = '+41764719130',
+    whatsappNumber = '+41764719130'
 }: StickyCTAProps) {
     const t = useTranslations('stickyCta');
 

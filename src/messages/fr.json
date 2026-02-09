@@ -199,7 +199,9 @@
                 "documents": "Organisation et vérification des pièces justificatives",
                 "assistance": "Accompagnement personnalisé pour chaque étape"
             },
-            "cta": "Demander un accompagnement"
+            "cta": "Demander un accompagnement",
+            "cta_title": "Prêt à démarrer ?",
+            "cta_description": "Contactez-nous pour un accompagnement administratif personnalisé."
         },
         "assurances": {
             "title": "Assurances & Prévoyance",
@@ -236,7 +238,7 @@
         "call": "Appeler",
         "whatsapp": "WhatsApp",
         "devis": "Devis gratuit",
-        "phone": "+41 XX XXX XX XX"
+        "phone": "+41 76 471 91 30"
     },
     "devis": {
         "title": "Demander un devis",

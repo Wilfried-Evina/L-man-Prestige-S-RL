@@ -29,7 +29,7 @@ export default function MentionsLegalesPage() {
                   contact@lemanprestige.ch
                 </a>
               </p>
-              <p><span className="font-semibold text-white">Téléphone :</span> +41 XX XXX XX XX</p>
+              <p><span className="font-semibold text-white">Téléphone :</span> +41 76 471 91 30</p>
             </div>
           </div>
 

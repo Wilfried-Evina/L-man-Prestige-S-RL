@@ -65,6 +65,7 @@ export default function RelocationServicePage() {
                 <div className={styles.heroContent}>
                     <h1 className={styles.heroTitle}>{t('title')}</h1>
                     <p className={styles.heroSubtitle}>{t('subtitle')}</p>
+                    <Link href={`/${locale}/services/relocation/recherche`} className={styles.heroCta}>{t('cta')}</Link>
                 </div>
             </section>
 
