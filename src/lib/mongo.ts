@@ -1,4 +1,4 @@
-import { MongoClient, Db, Collection } from 'mongodb'
+import { MongoClient, Db, Collection, Document } from 'mongodb'
 
 let cachedClient: MongoClient | null = null
 let cachedDb: Db | null = null
@@ -13,7 +13,7 @@ export async function connectToMongo(uri: string, dbName: string) {
   return cachedDb
 }
 
-export async function getCollection<T = any>(name: string) {
+export async function getCollection<T extends Document = Document>(name: string) {
   const uri = process.env.MONGO_URI
   if (!uri) throw new Error('MONGO_URI not configured')
   const defaultDb = process.env.MONGO_DB || 'leman_prestige'
