@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Lato, Playfair_Display } from "next/font/google";
+import Script from "next/script";
 import "./globals.css";
 import ErrorSilencer from '@/components/dev/ErrorSilencer'
 
@@ -51,7 +52,7 @@ export default function RootLayout({
     "name": "Léman Prestige SÀRL",
     "url": process.env.NEXT_PUBLIC_SITE_URL || 'https://lemanprestige.ch',
     "logo": process.env.NEXT_PUBLIC_SITE_URL ? `${process.env.NEXT_PUBLIC_SITE_URL}/favicon.png` : '/favicon.png',
-    "telephone": "+41 76 471 91 30",
+    "telephone": "+41 76 523 24 31",
     "email": "info@lemanprestige.com",
     "address": {
       "@type": "PostalAddress",
@@ -68,6 +69,15 @@ export default function RootLayout({
   return (
     <html lang="fr" suppressHydrationWarning className={`${lato.variable} ${playfair.variable}`}>
       <body suppressHydrationWarning className="font-body">
+        <Script src="https://www.googletagmanager.com/gtag/js?id=G-LHC5LGV8HR" strategy="afterInteractive" />
+        <Script id="google-analytics" strategy="afterInteractive">
+          {`
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', 'G-LHC5LGV8HR');
+          `}
+        </Script>
         {process.env.NODE_ENV !== 'production' && <ErrorSilencer />}
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(localBusiness) }} />
         {children}

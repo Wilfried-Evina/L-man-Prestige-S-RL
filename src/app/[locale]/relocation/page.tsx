@@ -1,11 +1,13 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
+import { useTranslations } from 'next-intl';
 import styles from '../devis/DevisPage.module.css';
 import flatpickr from 'flatpickr';
 import 'flatpickr/dist/flatpickr.min.css';
 
 export default function RelocationPage() {
+  const t = useTranslations('relocationPage');
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -67,7 +69,7 @@ export default function RelocationPage() {
         setErrorMessage(null);
       } else {
         setSubmitStatus('error');
-        setErrorMessage(data && data.message ? String(data.message) : 'Erreur');
+        setErrorMessage(data && data.message ? String(data.message) : t('errorDefault'));
       }
     } catch (err) {
       console.error('Submit failed', err);
@@ -112,9 +114,9 @@ export default function RelocationPage() {
             </div>
             <div className={styles.successRipple}></div>
           </div>
-          <h2 className={styles.successTitle}>Demande reçue !</h2>
+          <h2 className={styles.successTitle}>{t('successTitle')}</h2>
           <p className={styles.successMessage}>
-            Nous avons bien reçu votre demande et vous recontacterons très rapidement.
+            {t('successMessage')}
           </p>
         </div>
       </div>
@@ -129,10 +131,10 @@ export default function RelocationPage() {
       <div className={styles.devisContainer}>
         <div className={styles.header}>
           <div className={styles.headerBadge}>
-            <span>Recherche d'appartement</span>
+            <span>{t('badge')}</span>
           </div>
-          <h1 className={styles.title}>Chercher un appartement</h1>
-          <p className={styles.subtitle}>Remplissez le formulaire ci-dessous et nous vous aiderons à trouver votre logement idéal.</p>
+          <h1 className={styles.title}>{t('title')}</h1>
+          <p className={styles.subtitle}>{t('subtitle')}</p>
           <div className={styles.headerDivider}>
             <span className={styles.dividerLine}></span>
             <span className={styles.dividerIcon}>◆</span>
@@ -143,27 +145,27 @@ export default function RelocationPage() {
         <div className={styles.progressContainer}>
           <div className={styles.progressStep}>
             <div className={`${styles.progressDot} ${styles.active}`}>1</div>
-            <span className={styles.progressLabel}>Profil</span>
+            <span className={styles.progressLabel}>{t('step1')}</span>
           </div>
           <div className={styles.progressLine}></div>
           <div className={styles.progressStep}>
             <div className={`${styles.progressDot} ${formData.city ? styles.active : ''}`}>2</div>
-            <span className={styles.progressLabel}>Critères</span>
+            <span className={styles.progressLabel}>{t('step2')}</span>
           </div>
           <div className={styles.progressLine}></div>
           <div className={styles.progressStep}>
             <div className={`${styles.progressDot} ${formData.description ? styles.active : ''}`}>3</div>
-            <span className={styles.progressLabel}>Détails</span>
+            <span className={styles.progressLabel}>{t('step3')}</span>
           </div>
         </div>
 
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.formSection}>
-            <h3 className={styles.sectionTitle}>Informations personnelles</h3>
+            <h3 className={styles.sectionTitle}>{t('personalInfo')}</h3>
             
             <div className={styles.grid}>
               <div className={`${styles.inputGroup} ${focusedField === 'firstName' ? styles.focused : ''}`}>
-                <label className={styles.label}>Prénom <span className={styles.required}>*</span></label>
+                <label className={styles.label}>{t('firstName')} <span className={styles.required}>*</span></label>
                 <input
                   type="text"
                   name="firstName"
@@ -177,7 +179,7 @@ export default function RelocationPage() {
                 />
               </div>
               <div className={`${styles.inputGroup} ${focusedField === 'lastName' ? styles.focused : ''}`}>
-                <label className={styles.label}>Nom <span className={styles.required}>*</span></label>
+                <label className={styles.label}>{t('lastName')} <span className={styles.required}>*</span></label>
                 <input
                   type="text"
                   name="lastName"
@@ -194,7 +196,7 @@ export default function RelocationPage() {
 
             <div className={styles.grid}>
               <div className={`${styles.inputGroup} ${focusedField === 'email' ? styles.focused : ''}`}>
-                <label className={styles.label}>Email <span className={styles.required}>*</span></label>
+                <label className={styles.label}>{t('email')} <span className={styles.required}>*</span></label>
                 <input
                   type="email"
                   name="email"
@@ -208,7 +210,7 @@ export default function RelocationPage() {
                 />
               </div>
               <div className={`${styles.inputGroup} ${focusedField === 'phone' ? styles.focused : ''}`}>
-                <label className={styles.label}>Téléphone <span className={styles.required}>*</span></label>
+                <label className={styles.label}>{t('phone')} <span className={styles.required}>*</span></label>
                 <input
                   type="tel"
                   name="phone"
@@ -225,11 +227,11 @@ export default function RelocationPage() {
           </div>
 
           <div className={styles.formSection}>
-            <h3 className={styles.sectionTitle}>Critères de recherche</h3>
+            <h3 className={styles.sectionTitle}>{t('searchCriteria')}</h3>
             
             <div className={styles.grid}>
               <div className={`${styles.inputGroup} ${focusedField === 'city' ? styles.focused : ''}`}>
-                <label className={styles.label}>Ville <span className={styles.required}>*</span></label>
+                <label className={styles.label}>{t('city')} <span className={styles.required}>*</span></label>
                 <input
                   type="text"
                   name="city"
@@ -243,7 +245,7 @@ export default function RelocationPage() {
                 />
               </div>
               <div className={`${styles.inputGroup} ${focusedField === 'minRooms' ? styles.focused : ''}`}>
-                <label className={styles.label}>Nombre de pièces min</label>
+                <label className={styles.label}>{t('minRooms')}</label>
                 <input
                   type="number"
                   name="minRooms"
@@ -258,7 +260,7 @@ export default function RelocationPage() {
             </div>
 
             <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'maxBudget' ? styles.focused : ''}`}>
-              <label className={styles.label}>Budget maximum (CHF / mois)</label>
+              <label className={styles.label}>{t('maxBudget')}</label>
               <input
                 type="number"
                 name="maxBudget"
@@ -278,14 +280,14 @@ export default function RelocationPage() {
               style={{marginTop: '1rem'}}
             >
               <span className={styles.buttonContent}>
-                <span>Rechercher des appartements</span>
+                <span>{t('searchButton')}</span>
                 <span className={styles.buttonIcon}>🔍</span>
               </span>
             </button>
 
             {searchResults.length > 0 && (
               <div style={{marginTop: '1.5rem', padding: '1rem', background: 'rgba(5, 22, 34, 0.3)', borderRadius: '8px'}}>
-                <strong style={{color: '#fff'}}>Résultats trouvés : {searchResults.length}</strong>
+                <strong style={{color: '#fff'}}>{t('resultsFound')} {searchResults.length}</strong>
                 <ul style={{marginTop: '0.5rem', color: 'rgba(255, 255, 255, 0.8)'}}>
                   {searchResults.map(r => (
                     <li key={r.id} style={{marginTop: '0.5rem', fontSize: '0.9rem'}}>
@@ -298,10 +300,10 @@ export default function RelocationPage() {
           </div>
 
           <div className={styles.formSection}>
-            <h3 className={styles.sectionTitle}>Date et détails</h3>
+            <h3 className={styles.sectionTitle}>{t('dateDetails')}</h3>
             
             <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'moveDate' ? styles.focused : ''}`}>
-              <label className={styles.label}>Date de déménagement souhaitée</label>
+              <label className={styles.label}>{t('moveDate')}</label>
               <input
                 type="text"
                 name="moveDate"
@@ -315,7 +317,7 @@ export default function RelocationPage() {
             </div>
 
             <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'description' ? styles.focused : ''}`}>
-              <label className={styles.label}>Détails supplémentaires</label>
+              <label className={styles.label}>{t('additionalDetails')}</label>
               <textarea
                 name="description"
                 value={formData.description}
@@ -323,10 +325,10 @@ export default function RelocationPage() {
                 onFocus={() => setFocusedField('description')}
                 onBlur={() => setFocusedField(null)}
                 rows={5}
-                placeholder="Décrivez votre situation, vos préférences, contraintes particulières..."
+                placeholder={t('descPlaceholder')}
                 className={styles.textarea}
               />
-              <span className={styles.charCount}>{formData.description.length} caractères</span>
+              <span className={styles.charCount}>{formData.description.length} {t('chars')}</span>
             </div>
           </div>
 
@@ -342,7 +344,7 @@ export default function RelocationPage() {
                 className={styles.checkbox}
               />
               <label htmlFor="privacy" className={styles.checkboxLabel}>
-                J'accepte la politique de confidentialité et le traitement de mes données personnelles. <span className={styles.required}>*</span>
+                {t('privacy')} <span className={styles.required}>*</span>
               </label>
             </div>
 
@@ -354,22 +356,22 @@ export default function RelocationPage() {
               {isSubmitting ? (
                 <span className={styles.buttonLoading}>
                   <span className={styles.spinner}></span>
-                  Envoi en cours...
+                  {t('submitting')}
                 </span>
               ) : (
                 <span className={styles.buttonContent}>
-                  <span>Envoyer ma demande</span>
+                  <span>{t('submit')}</span>
                   <span className={styles.buttonIcon}>→</span>
                 </span>
               )}
             </button>
 
             <p className={styles.submitNote}>
-              Vos données sont sécurisées et ne seront jamais partagées.
+              {t('secureNote')}
             </p>
             {submitStatus === 'error' && (
               <p className={styles.errorMessage} role="alert">
-                {errorMessage ? errorMessage : 'Erreur lors de l\'envoi'}
+                {errorMessage ? errorMessage : t('errorFallback')}
               </p>
             )}
           </div>

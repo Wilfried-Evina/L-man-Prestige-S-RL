@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server'
 import path from 'path'
-import { getTokenFromCookie, verifyToken } from '../../../../lib/adminAuth'
+import { isAuthorized } from '../../../../lib/adminAuth'
 import { readJson, writeJson, ensureFileExists } from '../../../../lib/safeJson'
 import { getCollection } from '../../../../lib/mongo'
 import { sanitizePropertyPayload } from '../../../../lib/validators'
@@ -14,13 +14,6 @@ async function readData() {
 
 async function writeData(data: any) {
   return writeJson(DATA_PATH, data)
-}
-
-function isAuthorized(request: Request) {
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'
-  const cookie = request.headers.get('cookie')
-  const token = getTokenFromCookie(cookie)
-  return verifyToken(token, ADMIN_PASSWORD)
 }
 
 export async function GET(request: Request) {

@@ -6,16 +6,17 @@ import styles from './PropertyDetail.module.css'
 import { getCollection } from '../../../../lib/mongo'
 import PropertyGallery from '../../../../components/PropertyGallery'
 import ContactModal from '../../../../components/ContactModal'
+import { getTranslations } from 'next-intl/server'
 
 type Props = { params: Promise<{ locale: string; id: string }>, searchParams: Promise<{ [key: string]: string | string[] | undefined }> }
 
-function formatPrice(price: any, type: string) {
+function formatPrice(price: any, type: string, perMonth: string) {
   if (!price) return '—'
   if (typeof price === 'string' && /[A-Za-z€$CHF]/.test(price)) return price
   const num = Number(String(price).replace(/[^0-9.-]+/g, ''))
   if (Number.isNaN(num)) return String(price)
   const formatted = num.toLocaleString('en-US')
-  if (type === 'rent') return `${formatted} CHF / mois`
+  if (type === 'rent') return `${formatted} CHF ${perMonth}`
   return `${formatted} CHF`
 }
 
@@ -24,6 +25,7 @@ export default async function Page({ params, searchParams }: Props) {
   const sp = await searchParams
   const fromAdmin = sp.from === 'admin'
   const backHref = fromAdmin ? `/${locale}/admin` : `/${locale}/properties`
+  const t = await getTranslations({ locale, namespace: 'propertyDetail' })
   let item: any = null
   if (process.env.MONGO_URI) {
     try {
@@ -44,9 +46,9 @@ export default async function Page({ params, searchParams }: Props) {
       <div className={styles.page}>
         <div className={styles.container}>
           <div className={styles.notFound}>
-            <h1 className={styles.notFoundTitle}>Annonce introuvable</h1>
-            <p className={styles.notFoundText}>Cette annonce n'existe pas ou a été supprimée.</p>
-            <a href={backHref} className={styles.notFoundLink}>← Retour</a>
+            <h1 className={styles.notFoundTitle}>{t('notFound')}</h1>
+            <p className={styles.notFoundText}>{t('notFoundText')}</p>
+            <a href={backHref} className={styles.notFoundLink}>{t('back')}</a>
           </div>
         </div>
       </div>
@@ -58,7 +60,7 @@ export default async function Page({ params, searchParams }: Props) {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-        <a href={backHref} className={styles.backLink}>← Retour aux annonces</a>
+        <a href={backHref} className={styles.backLink}>{t('backToList')}</a>
 
         {/* Hero — first image only */}
         <section className={styles.heroSection}>
@@ -67,7 +69,7 @@ export default async function Page({ params, searchParams }: Props) {
           </div>
           <div className={styles.heroOverlay}>
             <span className={styles.typeBadgeInline}>
-              {item.type === 'sale' ? 'Vente' : 'Location'}
+              {item.type === 'sale' ? t('sale') : t('rent')}
             </span>
             <h1 className={styles.heroTitle}>{item.title}</h1>
             <p className={styles.heroLocation}>{item.location}</p>
@@ -76,48 +78,55 @@ export default async function Page({ params, searchParams }: Props) {
 
         {/* Price banner */}
         <div className={styles.priceBanner}>
-          <span className={styles.priceLabel}>Prix</span>
-          <span className={styles.priceValue}>{formatPrice(item.price, item.type)}</span>
+          <span className={styles.priceLabel}>{t('price')}</span>
+          <span className={styles.priceValue}>{formatPrice(item.price, item.type, t('perMonth'))}</span>
         </div>
 
         {/* Details cards */}
         <section className={styles.detailsSection}>
           <div className={styles.detailCard}>
             <p className={styles.detailValue}>{item.sqm} m²</p>
-            <p className={styles.detailLabel}>Surface</p>
+            <p className={styles.detailLabel}>{t('surface')}</p>
           </div>
           <div className={styles.detailCard}>
             <p className={styles.detailValue}>{item.rooms}</p>
-            <p className={styles.detailLabel}>Pièces</p>
+            <p className={styles.detailLabel}>{t('rooms')}</p>
           </div>
           <div className={styles.detailCard}>
             <p className={styles.detailValue}>{item.baths}</p>
-            <p className={styles.detailLabel}>Salles de bain</p>
+            <p className={styles.detailLabel}>{t('baths')}</p>
           </div>
           <div className={styles.detailCard}>
-            <p className={styles.detailValue}>{item.type === 'sale' ? 'Vente' : 'Location'}</p>
-            <p className={styles.detailLabel}>Type</p>
+            <p className={styles.detailValue}>{item.type === 'sale' ? t('sale') : t('rent')}</p>
+            <p className={styles.detailLabel}>{t('type')}</p>
           </div>
         </section>
 
         {/* Description */}
         <section className={styles.descriptionSection}>
-          <h3 className={styles.descriptionTitle}>Description</h3>
-          <p className={styles.descriptionText}>{item.description || 'Pas de description disponible pour cette annonce.'}</p>
+          <h3 className={styles.descriptionTitle}>{t('description')}</h3>
+          <p className={styles.descriptionText}>{item.description || t('noDescription')}</p>
         </section>
 
         {/* Gallery — separate section below */}
         {item.images && item.images.length > 0 && (
           <section className={styles.gallerySection}>
-            <h3 className={styles.galleryTitle}>Galerie photos</h3>
+            <h3 className={styles.galleryTitle}>{t('gallery')}</h3>
             <PropertyGallery images={item.images} />
           </section>
         )}
 
         {/* CTA Contact */}
         <section className={styles.ctaSection}>
-          <p className={styles.ctaText}>Intéressé par ce bien ?</p>
-          <ContactModal />
+          <p className={styles.ctaText} style={{ color: 'rgba(255,255,255,0.85)', fontFamily: "'Inter', sans-serif" }}>{t('interested')}</p>
+          <ContactModal
+            propertyTitle={item.title}
+            propertyLocation={item.location}
+            propertyRooms={item.rooms}
+            propertyPrice={formatPrice(item.price, item.type, t('perMonth'))}
+            propertyType={item.type}
+            propertyId={item.id}
+          />
         </section>
       </div>
     </main>

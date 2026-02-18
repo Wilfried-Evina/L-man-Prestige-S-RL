@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 
 export default function RechercheAppartementPage() {
     const t = useTranslations('relocationForm');
+    const tr = useTranslations('recherchePage');
 
     const [formData, setFormData] = useState({
         firstName: '',
@@ -49,7 +50,7 @@ export default function RechercheAppartementPage() {
     };
 
     const typeOptions = [
-        { value: '', label: 'Sélectionnez...' },
+        { value: '', label: tr('selectDefault') },
         { value: 'studio', label: t('form.typeOptions.studio') },
         { value: '2p', label: t('form.typeOptions.2p') },
         { value: '3p', label: t('form.typeOptions.3p') },
@@ -58,7 +59,7 @@ export default function RechercheAppartementPage() {
     ];
 
     const furnishedOptions = [
-        { value: '', label: 'Sélectionnez...' },
+        { value: '', label: tr('selectDefault') },
         { value: 'yes', label: t('form.furnishedOptions.yes') },
         { value: 'no', label: t('form.furnishedOptions.no') },
         { value: 'indifferent', label: t('form.furnishedOptions.indifferent') },
@@ -72,7 +73,7 @@ export default function RechercheAppartementPage() {
                         <span className="text-6xl mb-6 block">✅</span>
                         <h2 className="text-white text-2xl font-bold mb-4">{t('form.success')}</h2>
                         <p className="text-white/70">
-                            Nous avons bien reçu votre demande de recherche d&apos;appartement et vous recontacterons sous 24h ouvrables.
+                            {tr('successMessage')}
                         </p>
                     </div>
                 </div>
@@ -425,7 +426,7 @@ export default function RechercheAppartementPage() {
                                                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                                                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                                             </svg>
-                                            <span>Envoi en cours...</span>
+                                            <span>{tr('submitting')}</span>
                                         </>
                                     ) : (
                                         <>
@@ -443,7 +444,7 @@ export default function RechercheAppartementPage() {
                     {/* Disclaimer */}
                     <div className="p-4 border border-[#C5A059]/30 rounded-sm bg-[#C5A059]/5">
                         <p className="text-white/70 text-xs leading-relaxed">
-                            ⚠️ Services de mise en relation et d&apos;assistance administrative. Léman Prestige Sàrl n&apos;agit pas en qualité de régie et ne signe pas les contrats de bail/sous-location à la place des parties.
+                            ⚠️ {tr('disclaimer')}
                         </p>
                     </div>
                 </form>

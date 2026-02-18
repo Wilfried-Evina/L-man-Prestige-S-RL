@@ -1,16 +1,9 @@
 import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
-import { getTokenFromCookie, verifyToken } from '../../../../lib/adminAuth'
+import { isAuthorized } from '../../../../lib/adminAuth'
 
 const UPLOAD_DIR = path.resolve(process.cwd(), 'public', 'uploads')
-
-function isAuthorized(request: Request) {
-  const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'
-  const cookie = request.headers.get('cookie')
-  const token = getTokenFromCookie(cookie)
-  return verifyToken(token, ADMIN_PASSWORD)
-}
 
 export async function POST(request: Request) {
   if (!isAuthorized(request)) return NextResponse.json({ error: 'unauthorized' }, { status: 401 })

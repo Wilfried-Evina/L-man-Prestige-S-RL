@@ -20,13 +20,13 @@ interface PropertyCardProps {
     };
 }
 
-function formatPrice(price: any, type: string) {
+function formatPrice(price: any, type: string, perMonth = 'mois') {
     if (!price) return '—';
     if (typeof price === 'string' && /[A-Za-z€$CHF]/.test(price)) return price;
     const num = Number(String(price).replace(/[^0-9.-]+/g, ''));
     if (Number.isNaN(num)) return String(price);
     const formatted = num.toLocaleString('en-US');
-    if (type === 'rent') return `${formatted} CHF / mois`;
+    if (type === 'rent') return `${formatted} CHF / ${perMonth}`;
     return `${formatted} CHF`;
 }
 
@@ -65,8 +65,8 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                 {/* Slider arrows — visible on hover, only if multiple images */}
                 {allImages.length > 1 && (
                     <>
-                        <button onClick={goPrev} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#C5A059]/80" aria-label="Précédent">‹</button>
-                        <button onClick={goNext} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#C5A059]/80" aria-label="Suivant">›</button>
+                        <button onClick={goPrev} className="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#C5A059]/80" aria-label={t('prev')}>‹</button>
+                        <button onClick={goNext} className="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-8 h-8 rounded-full bg-black/40 backdrop-blur-sm text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300 hover:bg-[#C5A059]/80" aria-label={t('next')}>›</button>
                         {/* Dots */}
                         <div className="absolute bottom-2 left-1/2 -translate-x-1/2 z-10 flex gap-1.5 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                             {allImages.map((_, i) => (
@@ -118,7 +118,7 @@ export const PropertyCard: React.FC<PropertyCardProps> = ({ property }) => {
                 {/* Price & CTA */}
                 <div className="flex items-center justify-between mt-auto pt-2">
                     <span className="text-white font-body text-base tracking-tight font-medium">
-                        {formatPrice(property.price, property.type)}
+                        {formatPrice(property.price, property.type, t('perMonth'))}
                     </span>
                     <Link href={`/${locale}/properties/${property.id}`} className="text-[#C5A059] text-[10px] uppercase tracking-[0.3em] font-bold relative group/btn overflow-hidden pt-1 hover:text-white hover:bg-[#C5A059]/10 transition-all duration-300 px-2 py-1 rounded">
                         <span className="relative z-10 transition-transform duration-500 group-hover:-translate-y-full block">

@@ -1,8 +1,10 @@
 "use client"
 import React, { useState, useCallback, useEffect } from 'react'
+import { useTranslations } from 'next-intl'
 
 export default function PropertyGallery({ images }: { images: string[] }) {
   const [lightboxIdx, setLightboxIdx] = useState<number | null>(null)
+  const t = useTranslations('gallery')
 
   if (!images || images.length === 0) return null
 
@@ -45,12 +47,12 @@ export default function PropertyGallery({ images }: { images: string[] }) {
             width: '100%', aspectRatio: '16/9', background: '#0a1a2a'
           }}
         >
-          <img src={mainImage} alt="Photo principale" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+          <img src={mainImage} alt={t('mainAlt')} style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
           <div style={{
             position: 'absolute', bottom: '12px', right: '12px', background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(8px)',
             color: 'white', fontSize: '12px', padding: '4px 12px', borderRadius: '20px'
           }}>
-            {images.length} photo{images.length > 1 ? 's' : ''}
+            {images.length > 1 ? t('photosCount', { count: images.length }) : t('photoCount', { count: images.length })}
           </div>
         </div>
 
@@ -70,7 +72,7 @@ export default function PropertyGallery({ images }: { images: string[] }) {
                   aspectRatio: '4/3', background: '#0a1a2a'
                 }}
               >
-                <img src={u} alt={`Photo ${i + 2}`} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s' }} />
+                <img src={u} alt={t('photoAlt', { number: i + 2 })} style={{ width: '100%', height: '100%', objectFit: 'cover', transition: 'transform 0.3s' }} />
                 {/* Show "+N" overlay on last thumbnail if more images */}
                 {i === 3 && thumbs.length > 4 && (
                   <div style={{
@@ -131,7 +133,7 @@ export default function PropertyGallery({ images }: { images: string[] }) {
           {/* Image */}
           <img
             src={images[lightboxIdx]}
-            alt={`Photo ${lightboxIdx + 1}`}
+            alt={t('photoAlt', { number: lightboxIdx + 1 })}
             onClick={(e) => e.stopPropagation()}
             style={{
               maxHeight: '80vh', maxWidth: '85vw', objectFit: 'contain',

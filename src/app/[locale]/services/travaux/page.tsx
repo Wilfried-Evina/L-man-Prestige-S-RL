@@ -9,19 +9,20 @@ import styles from '../ServiceHero.module.css';
 
 export default function TravauxServicePage() {
     const t = useTranslations('services.travaux');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.renovation'), desc: 'Rénovations structurelles, remise à neuf complète et transformations d\'espaces.' },
-        { title: t('features.peinture'), desc: 'Finitions peinture haute de gamme et revêtements muraux durables.' },
-        { title: t('features.menuiserie'), desc: 'Agencements sur mesure, portes, fenêtres et menuiseries intérieures.' },
+        { title: t('features.renovation'), desc: ts('travaux.offering1_desc') },
+        { title: t('features.peinture'), desc: ts('travaux.offering2_desc') },
+        { title: t('features.menuiserie'), desc: ts('travaux.offering3_desc') },
     ];
 
     const benefits = [
-        { icon: '✦', title: 'Équipe expérimentée', desc: 'Artisans certifiés et partenaires de confiance.' },
-        { icon: '✨', title: 'Réactivité', desc: 'Planning adapté et respect des délais.' },
-        { icon: '✓', title: 'Qualité garantie', desc: 'Suivi de chantier et contrôle qualité strict.' },
-        { icon: '◆', title: 'Transparence tarifaire', desc: 'Devis détaillé et sans surprise.' },
+        { icon: '✦', title: ts('travaux.benefit1_title'), desc: ts('travaux.benefit1_desc') },
+        { icon: '✨', title: ts('travaux.benefit2_title'), desc: ts('travaux.benefit2_desc') },
+        { icon: '✓', title: ts('travaux.benefit3_title'), desc: ts('travaux.benefit3_desc') },
+        { icon: '◆', title: ts('travaux.benefit4_title'), desc: ts('travaux.benefit4_desc') },
     ];
 
     return (
@@ -63,8 +64,8 @@ export default function TravauxServicePage() {
             {/* Benefits */}
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi nous choisir ?</h2>
-                    <p className={styles.benefitsSubtitle}>Un accompagnement de A à Z pour vos travaux de rénovation.</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('travaux.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('travaux.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((benefit, i) => (
@@ -80,8 +81,8 @@ export default function TravauxServicePage() {
             {/* CTA */}
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>Demander un devis</h2>
-                    <p className={styles.ctaDescription}>Obtenez une estimation gratuite et sans engagement pour votre projet.</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('travaux.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=travaux`}>
                             <Button variant="primary">{t('cta')}</Button>

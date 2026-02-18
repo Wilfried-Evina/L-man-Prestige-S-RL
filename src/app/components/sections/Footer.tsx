@@ -1,31 +1,32 @@
 'use client';
 
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import styles from './Footer.module.css';
 
 export default function Footer() {
   const t = useTranslations();
+  const locale = useLocale();
 
   const currentYear = new Date().getFullYear();
 
-  // Menu columns with services links
+  // Menu columns with locale-aware links
   const servicesLinks = [
-    { key: 'footer.sales', href: '/fr/services/travaux' },
-    { key: 'footer.rental', href: '/fr/services/nettoyage' },
-    { key: 'footer.management', href: '/fr/services/demenagement' },
-    { key: 'footer.relocation', href: '/fr/services/relocation' },
+    { key: 'footer.sales', href: `/${locale}/services/travaux` },
+    { key: 'footer.rental', href: `/${locale}/services/nettoyage` },
+    { key: 'footer.management', href: `/${locale}/services/demenagement` },
+    { key: 'footer.relocation', href: `/${locale}/services/relocation` },
   ];
   
   const aboutLinks = [
-    { key: 'footer.ourStory', href: '/fr/about' },
-    { key: 'footer.careers', href: '/fr/devis' },
+    { key: 'footer.ourStory', href: `/${locale}/about` },
+    { key: 'footer.careers', href: `/${locale}/devis` },
   ];
   
   const legalLinks = [
-    { key: 'footer.terms', href: '/fr/mentions-legales' },
-    { key: 'footer.privacy', href: '/fr/confidentialite' },
-    { key: 'footer.legalNotice', href: '/fr/mentions-legales' },
+    { key: 'footer.terms', href: `/${locale}/mentions-legales` },
+    { key: 'footer.privacy', href: `/${locale}/confidentialite` },
+    { key: 'footer.legalNotice', href: `/${locale}/mentions-legales` },
   ];
 
   return (
@@ -77,9 +78,9 @@ export default function Footer() {
                 <span className={styles.contactLabel}>{t('footer.email')}:</span>
                 <a href="mailto:info@lemanprestige.com">info@lemanprestige.com</a>
               </p>
-              <p>
-                <span className={styles.contactLabel}>Tél:</span>
-                <a href="tel:+41764719130">+41 76 471 91 30</a>
+                <p>
+                <span className={styles.contactLabel}>{t('footerExtra.phone_label')}</span>
+                <a href="tel:+41765232431">+41 76 523 24 31</a>
               </p>
               <p>
                 <span className={styles.contactLabel}>{t('footer.address')}:</span>
@@ -87,11 +88,11 @@ export default function Footer() {
               </p>
               <p>
                 <span className={styles.contactLabel}>{t('footer.hours')}:</span>
-                <span>Lun–Ven 08:00–18:00</span>
+                <span>{t('footerExtra.hours_value')}</span>
               </p>
               <p>
                 <span className={styles.contactLabel}>{t('footer.zone')}:</span>
-                <span>Genève & Suisse romande</span>
+                <span>{t('footerExtra.zone_value')}</span>
               </p>
             </div>
 

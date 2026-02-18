@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function SouslocationServicePage() {
     const t = useTranslations('services.souslocation');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.recherche'), desc: 'Recherche et sélection de candidats sérieux.' },
-        { title: t('features.visites'), desc: 'Organisation des visites et gestion des rendez-vous.' },
-        { title: t('features.autorisation'), desc: 'Gestion des autorisations et conformité contractuelle.' },
+        { title: t('features.recherche'), desc: ts('souslocation.offering1_desc') },
+        { title: t('features.visites'), desc: ts('souslocation.offering2_desc') },
+        { title: t('features.autorisation'), desc: ts('souslocation.offering3_desc') },
     ];
 
     const benefits = [
@@ -24,8 +25,8 @@ export default function SouslocationServicePage() {
                     <path d="M12 2l3 7h7l-5.5 4 2 7L12 16l-6.5 6 2-7L2 9h7z" />
                 </svg>
             ),
-            title: 'Sélection fiable',
-            desc: 'Vérification des profils et références.'
+            title: ts('souslocation.benefit1_title'),
+            desc: ts('souslocation.benefit1_desc')
         },
         {
             icon: (
@@ -33,8 +34,8 @@ export default function SouslocationServicePage() {
                     <path d="M20 6L9 17l-5-5" />
                 </svg>
             ),
-            title: 'Procédures simples',
-            desc: 'Contrats clairs et gestion administrative simplifiée.'
+            title: ts('souslocation.benefit2_title'),
+            desc: ts('souslocation.benefit2_desc')
         },
         {
             icon: (
@@ -42,8 +43,8 @@ export default function SouslocationServicePage() {
                     <path d="M3 7h18M3 12h12M3 17h18" />
                 </svg>
             ),
-            title: 'Support continu',
-            desc: 'Assistance pendant la sous-location et suivi post-entrée.'
+            title: ts('souslocation.benefit3_title'),
+            desc: ts('souslocation.benefit3_desc')
         },
     ];
 
@@ -83,8 +84,8 @@ export default function SouslocationServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi choisir notre service ?</h2>
-                    <p className={styles.benefitsSubtitle}>{t('description')}</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('souslocation.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('souslocation.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -99,8 +100,8 @@ export default function SouslocationServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>Demander un devis</h2>
-                    <p className={styles.ctaDescription}>Obtenez une estimation gratuite et sans engagement pour votre sous-location.</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('souslocation.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=souslocation`}>
                             <Button variant="primary">{t('cta')}</Button>

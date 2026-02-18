@@ -16,6 +16,7 @@ const Header: React.FC<HeaderProps> = ({ locale: propLocale }) => {
     const hookLocale = useLocale();
     const locale = propLocale || hookLocale;
     const t = useTranslations('header');
+    const tm = useTranslations('headerMobile');
 
     useEffect(() => {
         const handleScroll = () => {
@@ -163,10 +164,9 @@ const Header: React.FC<HeaderProps> = ({ locale: propLocale }) => {
                                     {link.name}
                                 </span>
                                 <span className="block text-white/40 text-xs mt-1 group-hover:text-white/60 transition-colors">
-                                    {link.name === t('properties') && 'Découvrez nos biens'}
-                                    {link.name === t('services') && 'Nos prestations'}
-                                    {link.name === t('about') && 'Notre histoire'}
-                                    {link.name === t('contact') && 'Demandez un devis'}
+                                    {link.name === t('services') && tm('services_sub')}
+                                    {link.name === t('about') && tm('about_sub')}
+                                    {link.name === t('contact') && tm('contact_sub')}
                                 </span>
                             </Link>
                         ))}
@@ -175,12 +175,12 @@ const Header: React.FC<HeaderProps> = ({ locale: propLocale }) => {
                     {/* Footer du menu */}
                     <div className="absolute bottom-0 left-0 right-0 p-5 border-t border-white/10 bg-[#051622]">
                         <div className="flex items-center justify-between mb-4">
-                            <span className="text-white/50 text-xs uppercase tracking-wider">Langue</span>
+                            <span className="text-white/50 text-xs uppercase tracking-wider">{tm('language')}</span>
                             <LanguageSwitcher />
                         </div>
                         <div className="text-center pt-3 border-t border-white/5">
-                            <p className="text-[#C5A059] text-[10px] uppercase tracking-[0.5em] font-light mb-2">Excellence</p>
-                            <p className="text-white/30 text-[9px] uppercase tracking-wider">Genève et toute la Suisse Romande</p>
+                            <p className="text-[#C5A059] text-[10px] uppercase tracking-[0.5em] font-light mb-2">{tm('excellence')}</p>
+                            <p className="text-white/30 text-[9px] uppercase tracking-wider">{tm('zone')}</p>
                         </div>
                     </div>
                 </div>

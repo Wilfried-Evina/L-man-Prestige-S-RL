@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function RelocationServicePage() {
     const t = useTranslations('services.relocation');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.recherche'), desc: 'Recherche ciblée d’appartements selon vos critères.' },
-        { title: t('features.preselection'), desc: 'Présélection et vérification des annonces.' },
-        { title: t('features.visites'), desc: 'Organisation et accompagnement lors des visites.' },
+        { title: t('features.recherche'), desc: ts('relocation.offering1_desc') },
+        { title: t('features.preselection'), desc: ts('relocation.offering2_desc') },
+        { title: t('features.visites'), desc: ts('relocation.offering3_desc') },
     ];
 
     const benefits = [
@@ -24,8 +25,8 @@ export default function RelocationServicePage() {
                     <path d="M3 7h18M3 12h12M3 17h18" />
                 </svg>
             ),
-            title: 'Gain de temps',
-            desc: 'Nous filtrons et préqualifions pour vous présenter les meilleures options.'
+            title: ts('relocation.benefit1_title'),
+            desc: ts('relocation.benefit1_desc')
         },
         {
             icon: (
@@ -33,8 +34,8 @@ export default function RelocationServicePage() {
                     <path d="M12 3v4M12 17v4M3 12h4M17 12h4" />
                 </svg>
             ),
-            title: 'Accompagnement personnalisé',
-            desc: 'Un interlocuteur dédié pour coordonner chaque étape.'
+            title: ts('relocation.benefit2_title'),
+            desc: ts('relocation.benefit2_desc')
         },
         {
             icon: (
@@ -42,8 +43,8 @@ export default function RelocationServicePage() {
                     <path d="M20 6L9 17l-5-5" />
                 </svg>
             ),
-            title: 'Fiabilité',
-            desc: 'Processus transparent et dossiers vérifiés pour chaque candidature.'
+            title: ts('relocation.benefit3_title'),
+            desc: ts('relocation.benefit3_desc')
         },
     ];
 
@@ -83,8 +84,8 @@ export default function RelocationServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi choisir notre relocation ?</h2>
-                    <p className={styles.benefitsSubtitle}>{t('description')}</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('relocation.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('relocation.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -99,8 +100,8 @@ export default function RelocationServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>Demander un devis</h2>
-                    <p className={styles.ctaDescription}>Obtenez une estimation gratuite et sans engagement pour votre relocation.</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('relocation.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/services/relocation/recherche`}>
                             <Button variant="primary">{t('cta')}</Button>

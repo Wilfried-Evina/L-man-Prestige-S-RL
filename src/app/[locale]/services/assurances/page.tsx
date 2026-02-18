@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function AssurancesServicePage() {
     const t = useTranslations('services.assurances');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.lamal'), desc: 'Conseil personnalisé pour votre couverture maladie de base (LAMal).' },
-        { title: t('features.prevoyance'), desc: 'Solutions de prévoyance et assurance-vie adaptées à votre situation.' },
-        { title: t('features.comparaison'), desc: 'Comparaison rapide des meilleures offres pour optimiser vos cotisations.' },
+        { title: t('features.lamal'), desc: ts('assurances.offering1_desc') },
+        { title: t('features.prevoyance'), desc: ts('assurances.offering2_desc') },
+        { title: t('features.comparaison'), desc: ts('assurances.offering3_desc') },
     ];
 
     const benefits = [
@@ -24,8 +25,8 @@ export default function AssurancesServicePage() {
                     <path d="M12 2l7 4v6c0 5-3.8 9.7-7 10-3.2-.3-7-5-7-10V6l7-4z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: t('benefit_couverture_title'),
-            desc: t('benefit_couverture_desc')
+            title: ts('assurances.benefit1_title'),
+            desc: ts('assurances.benefit1_desc')
         },
         {
             icon: (
@@ -35,8 +36,8 @@ export default function AssurancesServicePage() {
                     <path d="M9.5 13.5l1.8 1.8 4.2-4.2" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: t('benefit_transparence_title'),
-            desc: t('benefit_transparence_desc')
+            title: ts('assurances.benefit2_title'),
+            desc: ts('assurances.benefit2_desc')
         },
         {
             icon: (
@@ -45,8 +46,8 @@ export default function AssurancesServicePage() {
                     <path d="M12 8v5l3 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: t('benefit_rapidite_title'),
-            desc: t('benefit_rapidite_desc')
+            title: ts('assurances.benefit3_title'),
+            desc: ts('assurances.benefit3_desc')
         },
         {
             icon: (
@@ -54,8 +55,8 @@ export default function AssurancesServicePage() {
                     <path d="M9 12l2 2 4-4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: t('benefit_accompagnement_title'),
-            desc: t('benefit_accompagnement_desc')
+            title: ts('assurances.benefit4_title'),
+            desc: ts('assurances.benefit4_desc')
         }
     ];
 
@@ -95,8 +96,8 @@ export default function AssurancesServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>{t('benefits_title')}</h2>
-                    <p className={styles.benefitsSubtitle}>{t('benefits_subtitle')}</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('assurances.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('assurances.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -111,8 +112,8 @@ export default function AssurancesServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>{t('cta_title') ?? 'Besoin d’un conseil ?'}</h2>
-                    <p className={styles.ctaDescription}>{t('cta_description') ?? 'Parlez à un expert pour trouver la meilleure solution.'}</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('assurances.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=assurances`}>
                             <Button variant="primary">{t('cta')}</Button>

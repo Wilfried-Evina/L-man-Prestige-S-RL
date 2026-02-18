@@ -9,6 +9,7 @@ import 'flatpickr/dist/flatpickr.min.css';
 
 export default function DevisPage() {
     const t = useTranslations('devis');
+    const tp = useTranslations('devisPage');
     const searchParams = useSearchParams();
     const preselectedService = searchParams.get('service') || '';
 
@@ -134,7 +135,7 @@ export default function DevisPage() {
                     </div>
                     <h2 className={styles.successTitle}>{t('form.success')}</h2>
                     <p className={styles.successMessage}>
-                        Nous avons bien reçu votre demande et vous recontacterons très rapidement.
+                        {tp('successMessage')}
                     </p>
                     
                 </div>
@@ -152,7 +153,7 @@ export default function DevisPage() {
                 {/* Header */}
                 <div className={styles.header}>
                     <div className={styles.headerBadge}>
-                        <span>Demande personnalisée</span>
+                        <span>{tp('badge')}</span>
                     </div>
                     <h1 className={styles.title}>{t('title')}</h1>
                     <p className={styles.subtitle}>{t('subtitle')}</p>
@@ -167,17 +168,17 @@ export default function DevisPage() {
                 <div className={styles.progressContainer}>
                     <div className={styles.progressStep}>
                         <div className={`${styles.progressDot} ${styles.active}`}>1</div>
-                        <span className={styles.progressLabel}>Informations</span>
+                        <span className={styles.progressLabel}>{tp('step1')}</span>
                     </div>
                     <div className={styles.progressLine}></div>
                     <div className={styles.progressStep}>
                         <div className={`${styles.progressDot} ${formData.service ? styles.active : ''}`}>2</div>
-                        <span className={styles.progressLabel}>Service</span>
+                        <span className={styles.progressLabel}>{tp('step2')}</span>
                     </div>
                     <div className={styles.progressLine}></div>
                     <div className={styles.progressStep}>
                         <div className={`${styles.progressDot} ${formData.description ? styles.active : ''}`}>3</div>
-                        <span className={styles.progressLabel}>Détails</span>
+                        <span className={styles.progressLabel}>{tp('step3')}</span>
                     </div>
                 </div>
 
@@ -186,7 +187,7 @@ export default function DevisPage() {
                     {/* Section: Informations personnelles */}
                     <div className={styles.formSection}>
                         <h3 className={styles.sectionTitle}>
-                            Informations personnelles
+                            {tp('personalInfo')}
                         </h3>
                         
                         <div className={styles.grid}>
@@ -263,7 +264,7 @@ export default function DevisPage() {
                     {/* Section: Service souhaité */}
                     <div className={styles.formSection}>
                         <h3 className={styles.sectionTitle}>
-                            Service souhaité
+                            {tp('serviceSection')}
                         </h3>
                         
                         <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'service' ? styles.focused : ''}`}>
@@ -294,7 +295,7 @@ export default function DevisPage() {
                     {/* Section: Localisation */}
                     <div className={styles.formSection}>
                         <h3 className={styles.sectionTitle}>
-                            Localisation
+                            {tp('locationSection')}
                         </h3>
                         
                         <div className={styles.grid}>
@@ -352,7 +353,7 @@ export default function DevisPage() {
                     {/* Section: Détails du projet */}
                     <div className={styles.formSection}>
                         <h3 className={styles.sectionTitle}>
-                            Détails du projet
+                            {tp('detailsSection')}
                         </h3>
                         
                         <div className={`${styles.inputGroup} ${styles.fullWidth} ${focusedField === 'description' ? styles.focused : ''}`}>
@@ -367,10 +368,10 @@ export default function DevisPage() {
                                 onBlur={() => setFocusedField(null)}
                                 required
                                 rows={5}
-                                placeholder="Décrivez votre projet en détail : superficie, type de bien, contraintes particulières..."
+                                placeholder={tp('descPlaceholder')}
                                 className={styles.textarea}
                             />
-                            <span className={styles.charCount}>{formData.description.length} caractères</span>
+                            <span className={styles.charCount}>{formData.description.length} {tp('chars')}</span>
                         </div>
                     </div>
 
@@ -399,18 +400,18 @@ export default function DevisPage() {
                             {isSubmitting ? (
                                 <span className={styles.buttonLoading}>
                                     <span className={styles.spinner}></span>
-                                    Envoi en cours...
+                                    {tp('submitting')}
                                 </span>
                             ) : (
                                 <span className={styles.buttonContent}>
-                                    <span>Envoyer ma demande</span>
+                                    <span>{tp('submit')}</span>
                                     <span className={styles.buttonIcon}>→</span>
                                 </span>
                             )}
                         </button>
 
                         <p className={styles.submitNote}>
-                            Vos données sont sécurisées et ne seront jamais partagées.
+                            {tp('secureNote')}
                         </p>
                         {submitStatus === 'error' && (
                             <p className={styles.errorMessage} role="alert">

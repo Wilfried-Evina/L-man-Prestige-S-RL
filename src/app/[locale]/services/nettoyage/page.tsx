@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function NettoyageServicePage() {
     const t = useTranslations('services.nettoyage');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.finbail'), desc: 'Nettoyage complet pour restitution locative conforme.' },
-        { title: t('features.finchantier'), desc: 'Nettoyage après chantier, évacuation des déchets et remise en état.' },
-        { title: t('features.vitres'), desc: 'Nettoyage professionnel de surfaces vitrées, intérieures et extérieures.' },
+        { title: t('features.finbail'), desc: ts('nettoyage.offering1_desc') },
+        { title: t('features.finchantier'), desc: ts('nettoyage.offering2_desc') },
+        { title: t('features.vitres'), desc: ts('nettoyage.offering3_desc') },
     ];
 
     const benefits = [
@@ -25,8 +26,8 @@ export default function NettoyageServicePage() {
                     <path d="M6 20v-1a4 4 0 0 1 4-4h4a4 4 0 0 1 4 4v1" />
                 </svg>
             ),
-            title: 'Équipe pro',
-            desc: 'Opérateurs formés et équipement professionnel.'
+            title: ts('nettoyage.benefit1_title'),
+            desc: ts('nettoyage.benefit1_desc')
         },
         {
             icon: (
@@ -34,8 +35,8 @@ export default function NettoyageServicePage() {
                     <path d="M20.4 8.6c-1.6-1.6-4.4-1.6-6 0l-1.4 1.4-1.4-1.4c-1.6-1.6-4.4-1.6-6 0-1.6 1.6-1.6 4.4 0 6l7.4 7.4 7.4-7.4c1.6-1.6 1.6-4.4 0-6z" />
                 </svg>
             ),
-            title: 'Produits sûrs',
-            desc: 'Solutions éco-responsables sur demande.'
+            title: ts('nettoyage.benefit2_title'),
+            desc: ts('nettoyage.benefit2_desc')
         },
         {
             icon: (
@@ -43,8 +44,8 @@ export default function NettoyageServicePage() {
                     <path d="M20 6L9 17l-5-5" />
                 </svg>
             ),
-            title: 'Garantie qualité',
-            desc: 'Check-list et validation avant départ.'
+            title: ts('nettoyage.benefit3_title'),
+            desc: ts('nettoyage.benefit3_desc')
         },
         {
             icon: (
@@ -52,8 +53,8 @@ export default function NettoyageServicePage() {
                     <path d="M3 7h18M3 12h12M3 17h18" />
                 </svg>
             ),
-            title: 'Flexibilité',
-            desc: 'Interventions ponctuelles ou forfaits réguliers.'
+            title: ts('nettoyage.benefit4_title'),
+            desc: ts('nettoyage.benefit4_desc')
         },
     ];
 
@@ -93,8 +94,8 @@ export default function NettoyageServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi choisir notre nettoyage ?</h2>
-                    <p className={styles.benefitsSubtitle}>{t('subtitle')}</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('nettoyage.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('nettoyage.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -109,8 +110,8 @@ export default function NettoyageServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>Demander un devis</h2>
-                    <p className={styles.ctaDescription}>Obtenez une estimation gratuite et sans engagement pour votre nettoyage.</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('nettoyage.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=nettoyage`}>
                             <Button variant="primary">{t('cta')}</Button>

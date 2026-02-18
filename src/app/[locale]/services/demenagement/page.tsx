@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function DemenagementServicePage() {
     const t = useTranslations('services.demenagement');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.prive'), desc: 'Déménagement privé sécurisé et planifié.' },
-        { title: t('features.emballage'), desc: 'Emballage professionnel et protection de vos biens.' },
-        { title: t('features.montage'), desc: 'Montage et démontage de mobilier par des équipes expertes.' },
+        { title: t('features.prive'), desc: ts('demenagement.offering1_desc') },
+        { title: t('features.emballage'), desc: ts('demenagement.offering2_desc') },
+        { title: t('features.montage'), desc: ts('demenagement.offering3_desc') },
     ];
 
     const benefits = [
@@ -24,8 +25,8 @@ export default function DemenagementServicePage() {
                     <path d="M3 7h18M3 12h12M3 17h18" />
                 </svg>
             ),
-            title: 'Logistique maîtrisée',
-            desc: 'Planification, matériel adapté et suivi point par point.'
+            title: ts('demenagement.benefit1_title'),
+            desc: ts('demenagement.benefit1_desc')
         },
         {
             icon: (
@@ -33,8 +34,8 @@ export default function DemenagementServicePage() {
                     <path d="M12 3v4M12 17v4M3 12h4M17 12h4M5 5l3 3M16 16l3 3M5 19l3-3M16 8l3-3" />
                 </svg>
             ),
-            title: 'Protection des biens',
-            desc: 'Emballage, bâchage et manutention soigneuse.'
+            title: ts('demenagement.benefit2_title'),
+            desc: ts('demenagement.benefit2_desc')
         },
         {
             icon: (
@@ -42,8 +43,8 @@ export default function DemenagementServicePage() {
                     <path d="M20 6L9 17l-5-5" />
                 </svg>
             ),
-            title: 'Fiabilité',
-            desc: 'Équipes ponctuelles, assurance et gestion claire des horaires.'
+            title: ts('demenagement.benefit3_title'),
+            desc: ts('demenagement.benefit3_desc')
         },
     ];
 
@@ -83,8 +84,8 @@ export default function DemenagementServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi choisir notre déménagement ?</h2>
-                    <p className={styles.benefitsSubtitle}>{t('subtitle')}</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('demenagement.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('demenagement.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -99,8 +100,8 @@ export default function DemenagementServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>Demander un devis</h2>
-                    <p className={styles.ctaDescription}>Obtenez une estimation gratuite et sans engagement pour votre déménagement.</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('demenagement.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=demenagement`}>
                             <Button variant="primary">{t('cta')}</Button>

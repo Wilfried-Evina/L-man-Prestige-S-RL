@@ -120,9 +120,9 @@ export default function PropertiesPage() {
             <div className="h-8 sm:h-12 md:h-16 w-full" />
 
             {/* Grid Section */}
-            <section style={{ marginLeft: '18px', marginRight: '20px' }}>
+            <section className="px-4 sm:px-6 md:px-8">
                 {loading ? (
-                    <p className="text-white/60 text-center py-20">Chargement...</p>
+                    <p className="text-white/60 text-center py-20">{t('propertyDetail.loading')}</p>
                 ) : (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                     {filteredProperties.map((property) => (

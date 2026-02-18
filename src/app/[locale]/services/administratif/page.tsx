@@ -9,12 +9,13 @@ import styles from '../ServiceHero.module.css';
 
 export default function AdministratifServicePage() {
     const t = useTranslations('services.administratif');
+    const ts = useTranslations('servicePages');
     const locale = useLocale();
 
     const offerings = [
-        { title: t('features.logement'), desc: 'Gestion des contrats, état des lieux et relations propriétaires.' },
-        { title: t('features.services'), desc: 'Coordination des services liés au logement : ménage, maintenance, et réparations.' },
-        { title: t('features.documents'), desc: 'Préparation et archivage des documents administratifs et juridiques.' },
+        { title: t('features.logement'), desc: ts('administratif.offering1_desc') },
+        { title: t('features.services'), desc: ts('administratif.offering2_desc') },
+        { title: t('features.documents'), desc: ts('administratif.offering3_desc') },
     ];
 
     const benefits = [
@@ -25,8 +26,8 @@ export default function AdministratifServicePage() {
                     <path d="M14 3v4h4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: 'Conformité',
-            desc: 'Tous les dossiers sont traités selon la réglementation locale et les meilleures pratiques.'
+            title: ts('administratif.benefit1_title'),
+            desc: ts('administratif.benefit1_desc')
         },
         {
             icon: (
@@ -34,8 +35,8 @@ export default function AdministratifServicePage() {
                     <path d="M12 2l7 4v6c0 5-3.8 9.7-7 10-3.2-.3-7-5-7-10V6l7-4z" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: 'Sécurité',
-            desc: 'Protection des informations sensibles et confidentialité assurée.'
+            title: ts('administratif.benefit2_title'),
+            desc: ts('administratif.benefit2_desc')
         },
         {
             icon: (
@@ -44,8 +45,8 @@ export default function AdministratifServicePage() {
                     <path d="M12 8v5l3 2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: 'Réactivité',
-            desc: 'Processus optimisés pour des réponses rapides et des délais respectés.'
+            title: ts('administratif.benefit3_title'),
+            desc: ts('administratif.benefit3_desc')
         },
         {
             icon: (
@@ -54,8 +55,8 @@ export default function AdministratifServicePage() {
                     <path d="M7 18v2a3 3 0 006 0v-2" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
             ),
-            title: 'Support dédié',
-            desc: 'Un interlocuteur unique pour le suivi complet de votre dossier.'
+            title: ts('administratif.benefit4_title'),
+            desc: ts('administratif.benefit4_desc')
         }
     ];
 
@@ -95,8 +96,8 @@ export default function AdministratifServicePage() {
 
             <section className={styles.benefitsSection}>
                 <div className={styles.benefitsTitleSection}>
-                    <h2 className={styles.benefitsMainTitle}>Pourquoi choisir notre assistance administrative ?</h2>
-                    <p className={styles.benefitsSubtitle}>Simplifiez la gestion administrative liée à la location et à la propriété — on s'occupe de tout.</p>
+                    <h2 className={styles.benefitsMainTitle}>{ts('administratif.whyTitle')}</h2>
+                    <p className={styles.benefitsSubtitle}>{ts('administratif.whySubtitle')}</p>
                 </div>
                 <div className={styles.benefitsGrid}>
                     {benefits.map((b, i) => (
@@ -111,8 +112,8 @@ export default function AdministratifServicePage() {
 
             <section className={styles.ctaSection}>
                 <div className={styles.ctaContainer}>
-                    <h2 className={styles.ctaTitle}>{t('cta_title') ?? 'Prêt à démarrer ?'}</h2>
-                    <p className={styles.ctaDescription}>{t('cta_description') ?? 'Contactez-nous pour un accompagnement administratif personnalisé.'}</p>
+                    <h2 className={styles.ctaTitle}>{ts('ctaTitle')}</h2>
+                    <p className={styles.ctaDescription}>{ts('administratif.ctaDesc')}</p>
                     <div className={styles.ctaButtons}>
                         <Link href={`/${locale}/devis?service=administratif`}>
                             <Button variant="primary">{t('cta')}</Button>

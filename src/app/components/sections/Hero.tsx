@@ -2,7 +2,9 @@
 
 import { useTranslations } from '@/hooks/useTranslations';
 import { useState, useEffect } from 'react';
+import { useParams } from 'next/navigation';
 import Image from 'next/image';
+import Link from 'next/link';
 import styles from './Hero.module.css';
 
 // Images d'arrière-plan liées aux services de relocation/immobilier en Suisse
@@ -31,6 +33,8 @@ const backgroundImages = [
 
 export default function Hero() {
   const t = useTranslations();
+  const params = useParams();
+  const locale = (params?.locale as string) || 'fr';
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
@@ -69,8 +73,8 @@ export default function Hero() {
       {/* Content Container */}
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>{t('hero.title')}</h1>
-        <p className={styles.heroSubtitle}>Travaux, ménage, relocation à Genève et Suisse romande</p>
-        <button className={styles.heroCta}>{t('hero.cta')}</button>
+        <p className={styles.heroSubtitle}>{t('hero.subtitle')}</p>
+        <Link href={`/${locale}/devis`} className={styles.heroCta}>{t('hero.cta')}</Link>
       </div>
 
       {/* Image Indicators */}

@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useMemo } from 'react'
 import styles from './AdminDashboard.module.css'
 
 type Property = {
@@ -53,6 +53,16 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [selectedDeleteId, setSelectedDeleteId] = useState<string | null>(null)
 
+  // Search & filter state
+  const [searchQuery, setSearchQuery] = useState('')
+  const [filterType, setFilterType] = useState<'all' | 'sale' | 'rent'>('all')
+
+  // Password reset state
+  const [showPasswordModal, setShowPasswordModal] = useState(false)
+  const [pwForm, setPwForm] = useState({ current: '', newPw: '', confirm: '' })
+  const [pwError, setPwError] = useState<string | null>(null)
+  const [pwSuccess, setPwSuccess] = useState(false)
+
   async function fetchProperties() {
     setLoading(true)
     const res = await fetch('/api/admin/properties')
@@ -66,6 +76,25 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
   useEffect(() => {
     fetchProperties()
   }, [])
+
+  // Filtered properties
+  const filteredProperties = useMemo(() => {
+    let result = properties
+    if (filterType !== 'all') {
+      result = result.filter(p => p.type === filterType)
+    }
+    if (searchQuery.trim()) {
+      const q = searchQuery.toLowerCase().trim()
+      result = result.filter(p =>
+        (p.title || '').toLowerCase().includes(q) ||
+        (p.location || '').toLowerCase().includes(q) ||
+        String(p.price || '').toLowerCase().includes(q) ||
+        String(p.rooms || '').includes(q) ||
+        String(p.sqm || '').includes(q)
+      )
+    }
+    return result
+  }, [properties, searchQuery, filterType])
 
   function openCreate() {
     setEditingId(null)
@@ -183,6 +212,34 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
     })
   }
 
+  // Password reset handler
+  async function handlePasswordReset(e: React.FormEvent) {
+    e.preventDefault()
+    setPwError(null)
+    setPwSuccess(false)
+    if (pwForm.newPw !== pwForm.confirm) {
+      setPwError('Les nouveaux mots de passe ne correspondent pas.')
+      return
+    }
+    if (pwForm.newPw.length < 6) {
+      setPwError('Le nouveau mot de passe doit contenir au moins 6 caractères.')
+      return
+    }
+    const res = await fetch('/api/admin/change-password', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ currentPassword: pwForm.current, newPassword: pwForm.newPw })
+    })
+    if (res.ok) {
+      setPwSuccess(true)
+      setPwForm({ current: '', newPw: '', confirm: '' })
+      setTimeout(() => { setShowPasswordModal(false); setPwSuccess(false) }, 2000)
+    } else {
+      const data = await res.json().catch(() => ({}))
+      setPwError(data.error || 'Erreur lors du changement de mot de passe.')
+    }
+  }
+
   const saleCount = properties.filter(p => p.type === 'sale').length
   const rentCount = properties.filter(p => p.type === 'rent').length
 
@@ -210,6 +267,9 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
             <button className={styles.btnPrimary} onClick={openCreate}>
               <span>+</span> Nouvelle annonce
             </button>
+            <button className={styles.btnSecondary} onClick={() => { setShowPasswordModal(true); setPwError(null); setPwSuccess(false); setPwForm({ current: '', newPw: '', confirm: '' }) }}>
+              🔒 Mot de passe
+            </button>
             <button className={styles.btnSecondary} onClick={onLogout}>
               Se déconnecter
             </button>
@@ -232,13 +292,88 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
           </div>
         </div>
 
+        {/* Search & Filter Bar */}
+        <div style={{
+          display: 'flex', gap: '12px', marginBottom: '24px', flexWrap: 'wrap', alignItems: 'center'
+        }}>
+          {/* Search Input */}
+          <div style={{ position: 'relative', flex: '1 1 300px', minWidth: '220px' }}>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ position: 'absolute', left: '14px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }}>
+              <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+            </svg>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={e => setSearchQuery(e.target.value)}
+              placeholder="Rechercher par titre, lieu, prix, pièces…"
+              style={{
+                width: '100%', padding: '12px 16px 12px 44px', borderRadius: '12px',
+                background: 'rgba(10, 42, 67, 0.6)', border: '1px solid rgba(197, 160, 89, 0.15)',
+                color: '#fff', fontSize: '0.9rem', outline: 'none', transition: 'border-color 0.3s',
+              }}
+              onFocus={e => e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.5)'}
+              onBlur={e => e.currentTarget.style.borderColor = 'rgba(197, 160, 89, 0.15)'}
+            />
+            {searchQuery && (
+              <button
+                onClick={() => setSearchQuery('')}
+                style={{
+                  position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)',
+                  background: 'rgba(255,255,255,0.1)', border: 'none', color: 'rgba(255,255,255,0.6)',
+                  width: '22px', height: '22px', borderRadius: '50%', cursor: 'pointer', fontSize: '12px',
+                  display: 'flex', alignItems: 'center', justifyContent: 'center'
+                }}
+              >✕</button>
+            )}
+          </div>
+
+          {/* Filter Tabs */}
+          <div style={{ display: 'flex', gap: '6px', background: 'rgba(10, 42, 67, 0.6)', borderRadius: '12px', padding: '4px', border: '1px solid rgba(197, 160, 89, 0.1)' }}>
+            {([['all', 'Tous'], ['sale', 'Vente'], ['rent', 'Location']] as const).map(([val, label]) => (
+              <button
+                key={val}
+                onClick={() => setFilterType(val)}
+                style={{
+                  padding: '8px 18px', borderRadius: '8px', border: 'none', cursor: 'pointer',
+                  fontSize: '0.8rem', fontWeight: 600, letterSpacing: '0.02em', transition: 'all 0.2s',
+                  background: filterType === val ? 'rgba(197, 160, 89, 0.2)' : 'transparent',
+                  color: filterType === val ? '#C5A059' : 'rgba(255,255,255,0.5)',
+                  borderBottom: filterType === val ? '2px solid #C5A059' : '2px solid transparent',
+                }}
+              >
+                {label}
+              </button>
+            ))}
+          </div>
+
+          {/* Result count */}
+          <span style={{ color: 'rgba(255,255,255,0.4)', fontSize: '0.8rem', whiteSpace: 'nowrap' }}>
+            {filteredProperties.length} résultat{filteredProperties.length !== 1 ? 's' : ''}
+          </span>
+        </div>
+
         {/* Properties Grid */}
-        <h2 className={styles.sectionTitle}>Toutes les annonces</h2>
+        <h2 className={styles.sectionTitle}>
+          {searchQuery ? `Résultats pour « ${searchQuery} »` : 'Toutes les annonces'}
+        </h2>
         {loading ? (
           <p style={{ color: 'rgba(255,255,255,0.6)' }}>Chargement...</p>
+        ) : filteredProperties.length === 0 ? (
+          <div style={{
+            textAlign: 'center', padding: '60px 20px',
+            background: 'rgba(10, 42, 67, 0.3)', borderRadius: '16px',
+            border: '1px solid rgba(255,255,255,0.06)'
+          }}>
+            <p style={{ color: 'rgba(255,255,255,0.5)', fontSize: '1rem', margin: '0 0 8px' }}>
+              {searchQuery ? '🔍 Aucune annonce trouvée' : 'Aucune annonce'}
+            </p>
+            <p style={{ color: 'rgba(255,255,255,0.3)', fontSize: '0.85rem', margin: 0 }}>
+              {searchQuery ? 'Essayez avec d\'autres mots-clés' : 'Créez votre première annonce'}
+            </p>
+          </div>
         ) : (
           <div className={styles.propertiesGrid}>
-            {properties.map(p => (
+            {filteredProperties.map(p => (
               <div key={p.id} className={styles.propertyCard}>
                 <img src={((p as any).images && (p as any).images.length ? (p as any).images[0] : p.image) || '/images/placeholder.png'} alt={p.title} className={styles.propertyImage} />
                 <div className={styles.propertyContent}>
@@ -299,7 +434,7 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
                   </div>
                   <div className={styles.formGroup}>
                     <label>Pièces</label>
-                    <input type="number" value={form.rooms} onChange={e => setForm({ ...form, rooms: e.target.value })} placeholder="" />
+                    <input type="number" step="0.5" value={form.rooms} onChange={e => setForm({ ...form, rooms: e.target.value })} placeholder="ex: 3.5" />
                   </div>
                   <div className={styles.formGroup}>
                     <label>Salles de bain</label>
@@ -368,6 +503,68 @@ export default function AdminDashboard({ onLogout }: { onLogout: () => void }) {
               <button type="button" className={styles.btnSecondary} onClick={() => setShowDeleteModal(false)}>Annuler</button>
               <button type="button" className={styles.btnDelete} onClick={confirmDelete}>Supprimer</button>
             </div>
+          </div>
+        </div>
+      )}
+
+      {/* Password Reset Modal */}
+      {showPasswordModal && (
+        <div className={styles.modalOverlay} onClick={() => setShowPasswordModal(false)}>
+          <div className={styles.modal} onClick={e => e.stopPropagation()} style={{ maxWidth: '420px' }}>
+            <div className={styles.modalHeader}>
+              <h2>Changer le mot de passe</h2>
+              <button className={styles.btnClose} onClick={() => setShowPasswordModal(false)}>×</button>
+            </div>
+            <form className={styles.modalBody} onSubmit={handlePasswordReset}>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+                <div className={styles.formGroup}>
+                  <label>Mot de passe actuel</label>
+                  <input
+                    type="password"
+                    value={pwForm.current}
+                    onChange={e => setPwForm({ ...pwForm, current: e.target.value })}
+                    placeholder="••••••••"
+                    required
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>Nouveau mot de passe</label>
+                  <input
+                    type="password"
+                    value={pwForm.newPw}
+                    onChange={e => setPwForm({ ...pwForm, newPw: e.target.value })}
+                    placeholder="Minimum 6 caractères"
+                    required
+                    minLength={6}
+                  />
+                </div>
+                <div className={styles.formGroup}>
+                  <label>Confirmer le nouveau mot de passe</label>
+                  <input
+                    type="password"
+                    value={pwForm.confirm}
+                    onChange={e => setPwForm({ ...pwForm, confirm: e.target.value })}
+                    placeholder="••••••••"
+                    required
+                    minLength={6}
+                  />
+                </div>
+              </div>
+              {pwError && (
+                <p style={{ color: '#ef4444', fontSize: '0.85rem', margin: '12px 0 0', padding: '10px 14px', background: 'rgba(239,68,68,0.08)', borderRadius: '8px', border: '1px solid rgba(239,68,68,0.2)' }}>
+                  {pwError}
+                </p>
+              )}
+              {pwSuccess && (
+                <p style={{ color: '#22c55e', fontSize: '0.85rem', margin: '12px 0 0', padding: '10px 14px', background: 'rgba(34,197,94,0.08)', borderRadius: '8px', border: '1px solid rgba(34,197,94,0.2)' }}>
+                  ✓ Mot de passe modifié avec succès !
+                </p>
+              )}
+              <div className={styles.modalActions}>
+                <button type="button" className={styles.btnSecondary} onClick={() => setShowPasswordModal(false)}>Annuler</button>
+                <button type="submit" className={styles.btnPrimary}>Enregistrer</button>
+              </div>
+            </form>
           </div>
         </div>
       )}
